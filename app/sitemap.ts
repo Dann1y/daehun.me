@@ -1,6 +1,6 @@
 import { getBlogPosts } from 'app/blog/utils'
 
-export const baseUrl = 'localhost:3000'
+export const baseUrl = 'https://daehun.me'
 
 export default async function sitemap() {
   let blogs = getBlogPosts().map((post) => ({
