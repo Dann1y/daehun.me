@@ -7,9 +7,6 @@ const navItems = {
   '/blog': {
     name: 'blog',
   },
-  'https://www.linkedin.com/in/danny-lee17/': {
-    name: 'linkedin',
-  },
 }
 
 export function Navbar() {
