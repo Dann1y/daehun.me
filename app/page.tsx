@@ -7,9 +7,9 @@ export default function Page() {
         Who I am
       </h1>
       <ul className="mb-4">
-        <li>{`👨🏻‍💻 3+ years of experience, working as a Frontend developer.`}</li>
+        <li>{`👨🏻‍💻 Solving problems, working as a Product Manager.`}</li>
         <li>{`🏍️ Contributing to a shared mobility service, THE SWING.`}</li>
-        <li>{`👥 The Essence of a developer is solving user's needs & business problems.`}</li>
+        <li>{`🧠 Think, Act, Learn, Repeat.`}</li>
       </ul>
       <div className="my-8">
         <BlogPosts />
