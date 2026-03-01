@@ -1,8 +1,15 @@
 import { BlogPosts } from 'app/components/posts'
+import { baseUrl } from 'app/sitemap'
+import type { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Read my blog.',
+  description: '개발, AI, 프로덕트에 대한 생각을 기록하는 블로그.',
+  openGraph: {
+    title: 'Blog | Daehun Blog',
+    description: '개발, AI, 프로덕트에 대한 생각을 기록하는 블로그.',
+    url: `${baseUrl}/blog`,
+  },
 }
 
 export default function Page() {
