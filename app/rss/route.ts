@@ -20,6 +20,7 @@ export async function GET() {
           <pubDate>${new Date(
             post.metadata.publishedAt
           ).toUTCString()}</pubDate>
+          <guid>${baseUrl}/blog/${post.slug}</guid>
         </item>`
     )
     .join('\n')
@@ -29,7 +30,9 @@ export async function GET() {
     <channel>
         <title>Daehun Blog</title>
         <link>${baseUrl}</link>
-        <description>RSS feed</description>
+        <description>개발, AI, 프로덕트에 대한 생각을 기록하는 블로그.</description>
+        <language>ko</language>
+        <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
         ${itemsXml}
     </channel>
   </rss>`
