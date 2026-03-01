@@ -17,13 +17,22 @@ export const metadata: Metadata = {
     template: '%s | Daehun Blog',
   },
   description: 'Think, Write, Share',
+  keywords: ['블로그', '개발', '웹개발', 'AI', '프로덕트'],
+  alternates: {
+    canonical: baseUrl,
+  },
   openGraph: {
     title: 'Daehun Blog',
     description: 'Think, Write, Share',
     url: baseUrl,
     siteName: 'Daehun Blog',
-    locale: 'en_US',
+    locale: 'ko_KR',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Daehun Blog',
+    description: 'Think, Write, Share',
   },
   robots: {
     index: true,
@@ -46,7 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="ko"
       suppressHydrationWarning
       className={cx(
         'w-full h-full',
