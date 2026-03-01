@@ -8,6 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
 import { baseUrl } from './sitemap'
 import { cx } from 'class-variance-authority'
+import { ThemeProvider } from './components/theme-provider'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -46,6 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cx(
         'w-full h-full',
         'text-black bg-white dark:text-white dark:bg-black',
@@ -54,13 +56,15 @@ export default function RootLayout({
       )}
     >
       <body className="antialiased max-w-xl h-full pt-8 mx-4 lg:mx-auto">
-        <main className="flex-auto min-w-0 h-full flex flex-col px-2 md:px-0">
-          <Navbar />
-          {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
+        <ThemeProvider>
+          <main className="flex-auto min-w-0 h-full flex flex-col px-2 md:px-0">
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   )
