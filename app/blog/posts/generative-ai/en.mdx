@@ -1,0 +1,159 @@
+---
+title: "How AI Conquers the Stock Market"
+publishedAt: "2026-03-01"
+summary: "The power of 'sophisticated design' beyond simple commands"
+label: "논문"
+---
+
+<br />
+
+The era of the 'Black Box' is over.
+We are now entering the era of the '**Expert Architect**'.
+
+Artificial intelligence (AI) has emerged as the key driving force behind financial market decision-making,
+but vague prompts like "find me profitable stocks" are simply destined to fail in the market.
+The success or failure of AI investment systems that generate true alpha depends not on the size of the model,
+but on **how precisely human expert wisdom is embedded into the AI architecture**.
+
+<br />
+<br />
+
+## 1. Specificity Determines Success or Failure
+
+### The Magic of 'Fine-grained Tasks'
+
+A recent study targeting Japan's TOPIX 100 index clearly demonstrates
+the impact of instruction precision on returns when directing LLMs (Large Language Models).
+
+When given **abstract (coarse-grained) instructions** like "analyze the financial statements,"
+AI exhibits phenomena of missing signals or abandoning interpretation during the reasoning process.
+In contrast, when provided with **'specific (fine-grained)' instructions** that break down analytical steps
+to mimic expert workflows, system performance improved dramatically.
+
+Notably, as portfolio size (N) expanded from 10 to 50 stocks,
+the **performance gap widened even further** between systems with specific designs and those without.
+This implies that in complex multi-asset management environments, sophisticated task design maximizes 'Signal Propagation' efficiency.
+
+> "Providing coarse-grained instructions to LLMs for complex tasks presents two major challenges... performance degradation... and the lack of interpretability."
+
+<br />
+<br />
+
+## 2. Knowledge Quality Equals Returns
+
+### The Critical Relationship Between RAG and Data Precision
+
+According to a study analyzing the top 2,500 large-cap stocks in the U.S. market,
+the **accuracy of domain knowledge** provided to AI through Retrieval-Augmented Generation (RAG) systems
+is the most powerful variable determining the Sharpe ratio.
+The principle of 'Garbage In, Garbage Out' applies mercilessly even to cutting-edge AI systems.
+
+When incorrect documents (Broken KB) were provided in experiments, the Sharpe ratio plummeted to **-0.109**, destroying asset value.
+In contrast, when an accurately corrected knowledge base (Fixed KB) was provided
+and a Long-Short market-neutral strategy was executed, the Sharpe ratio surged to **1.27**.
+
+| Data State (Knowledge Base) | Sharpe Ratio | Performance Analysis                           |
+| --------------------------- | ------------ | ---------------------------------------------- |
+| Broken Knowledge (Broken KB) | -0.109      | Asset loss due to information noise             |
+| Fixed Knowledge (Fixed KB)   | 1.27        | Significant risk-adjusted excess returns        |
+
+This data shows that no matter how excellent AI's reasoning capabilities are,
+inaccurate domain knowledge causes '**Alpha Decay**'.
+
+<br />
+<br />
+
+## 3. AI Has Already Become a 'Quant' on Its Own
+
+### Independently Discovered Investment Principles
+
+A remarkably surprising fact is that AI, without explicit financial education,
+independently mastered core principles of modern quantitative finance by learning from tens of thousands of data points.
+Analysis of AI-generated features revealed the following three dominant patterns:
+
+- **Cross-sectional Ranking (100% adoption)**
+  - AI independently understood that 'relative positioning' rather than absolute stock prices is the essence of returns.
+  - It grasped that long-short returns come from the 'spread' between stocks, not from absolute values.
+
+- **Volatility Normalization (93% adoption)**
+  - To respond to market 'regime shifts,' AI independently applied risk management techniques that reduce signal strength when volatility increases.
+
+- **Non-linear Interaction (80% adoption)**
+  - Beyond simply adding indicators, AI demonstrated the ability to read complex market states by multiplying or dividing multiple variables.
+
+These discoveries suggest that AI logically grasps the structural order of markets,
+and this is not mere coincidence but a **statistical inevitability**.
+
+<br />
+<br />
+
+## 4. 1+1 Is Greater Than 2
+
+### Multi-Agent Hierarchical Structure and Synergy
+
+To operate like the best quant teams, AI should adopt a hierarchical structure:
+**Analyst → Sector Agent → Portfolio Manager (PM Agent)**.
+
+In this structure, the role of the **Technical Agent** was decisive.
+Technical agents with specific task designs served as
+the **key driver** that effectively conveyed subtle price signals to the PM—signals
+that would be easily overlooked in abstract systems.
+
+The true strength of this system lies in '**Orthogonality**'.
+Low correlation between agents with different perspectives maximizes portfolio diversification effects.
+
+| Agent Combination              | Correlation           | Strategic Insight                                    |
+| ------------------------------ | --------------------- | ---------------------------------------------------- |
+| Technical vs Fundamental       | 0.06 – 0.20          | Very low correlation, excellent risk diversification |
+| News Analysis vs Financial     | Below 0.14            | Different information sources, complementary alpha   |
+
+> **Quant Insight** — The combination of technical and fundamental signals performs the '**magic of diversification**'
+> by reducing portfolio volatility while stably maintaining the Information Coefficient (IC).
+
+<br />
+<br />
+
+## 5. AI's Feature Design: 14x More Complex Than Human's
+
+Traditional academic factors consist of simple forms with 2–4 operations,
+but AI chains an average of **14.2 operations** to generate complex features that transcend human intuition.
+
+For example, the 'Overnight Gap' signal designed by AI
+goes far beyond simply looking at the difference between opening and closing prices.
+It passes through the following **6-stage pipeline**:
+
+1. **Gap Calculation** — Extract price deviations occurring outside trading hours
+2. **Vol-Normalization** — Normalize according to current volatility regime
+3. **Trend Comparison** — Compare short-term (5-day) and long-term (20-day) trends
+4. **Outlier Flagging** — Detect historical extreme values (Z-score) and remove noise
+5. **Ranking** — Assign relative rankings within sectors
+6. **Signal Chaining** — Combine into final execution signal
+
+Such sophisticated multi-stage pipelines exhibit much lower 'alpha decay' than simple momentum strategies,
+capturing the market's subtle inefficiencies.
+
+<br />
+<br />
+
+## Conclusion: Does AI Replace Humans, or Amplify Them?
+
+The conclusion of these studies is clear.
+AI is not an automation tool that replaces humans,
+but a '**Hypothesis-generation Engine**' that infinitely expands human hypothesis-generation capabilities.
+
+In actual operational environments, 'Implementation Lag (T+1 to T+2)' occurs
+between signal generation and execution.
+However, precisely designed AI systems demonstrated
+much higher return persistence than traditional approaches even within such time lags.
+
+The question is no longer "whether to use AI."
+"**How to more precisely design and teach expert practical experience and quantitative logic into the AI architecture**"
+will be the decisive battleground that determines true alpha.
+
+<br />
+<br />
+
+## References
+
+- Miyazaki, K., Kawahara, T., Roberts, S., & Zohren, S. (2026). _Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks_. [arXiv:2602.23330](https://arxiv.org/abs/2602.23330)
+- Rasekhschaffe, K. C. (2026). _Generative AI for Stock Selection_. [arXiv:2602.00196](https://arxiv.org/abs/2602.00196)
