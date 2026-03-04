@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function NotFound() {
   return (
     <section className="flex flex-col flex-1">
@@ -7,5 +5,5 @@ export default function NotFound() {
         404 - Page Not Found
       </h1>
     </section>
-  );
+  )
 }

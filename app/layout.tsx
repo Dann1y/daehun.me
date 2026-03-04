@@ -1,52 +1,7 @@
 import './global.css'
-import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { Navbar } from './components/nav'
-import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import Footer from './components/footer'
-import { baseUrl } from './sitemap'
 import { cx } from 'class-variance-authority'
-import { ThemeProvider } from './components/theme-provider'
-
-export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  title: {
-    default: 'Daehun Blog',
-    template: '%s | Daehun Blog',
-  },
-  description: 'Think, Write, Share',
-  keywords: ['블로그', '개발', '웹개발', 'AI', '프로덕트'],
-  alternates: {
-    canonical: baseUrl,
-  },
-  openGraph: {
-    title: 'Daehun Blog',
-    description: 'Think, Write, Share',
-    url: baseUrl,
-    siteName: 'Daehun Blog',
-    locale: 'ko_KR',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Daehun Blog',
-    description: 'Think, Write, Share',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-}
-
 
 export default function RootLayout({
   children,
@@ -65,15 +20,7 @@ export default function RootLayout({
       )}
     >
       <body className="antialiased max-w-xl h-full pt-8 mx-4 lg:mx-auto">
-        <ThemeProvider>
-          <main className="flex-auto min-w-0 h-full flex flex-col px-2 md:px-0">
-            <Navbar />
-            {children}
-            <Footer />
-            <Analytics />
-            <SpeedInsights />
-          </main>
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )

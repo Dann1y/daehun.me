@@ -2,7 +2,7 @@ import { baseUrl } from 'app/sitemap'
 import { getBlogPosts } from 'app/blog/utils'
 
 export async function GET() {
-  let allBlogs = await getBlogPosts()
+  let allBlogs = getBlogPosts('ko')
 
   const itemsXml = allBlogs
     .sort((a, b) => {
@@ -15,12 +15,12 @@ export async function GET() {
       (post) =>
         `<item>
           <title>${post.metadata.title}</title>
-          <link>${baseUrl}/blog/${post.slug}</link>
+          <link>${baseUrl}/ko/blog/${post.slug}</link>
           <description>${post.metadata.summary || ''}</description>
           <pubDate>${new Date(
             post.metadata.publishedAt
           ).toUTCString()}</pubDate>
-          <guid>${baseUrl}/blog/${post.slug}</guid>
+          <guid>${baseUrl}/ko/blog/${post.slug}</guid>
         </item>`
     )
     .join('\n')
