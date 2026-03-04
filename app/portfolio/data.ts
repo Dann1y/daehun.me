@@ -174,7 +174,9 @@ export const defaultPortfolioKo: PortfolioData = {
     },
   ],
   activities: [
-    { name: 'FEConf 2023', date: '2023' },
+    { name: 'FEConf TWIP 부스 운영', date: '2023.10' },
+    { name: '광주소프트웨어마이스터고등학교 재학생 대상 모의 면접 및 멘토링', date: '2023' },
+    { name: 'JA Korea Entrepreneur\'s Playground 창업놀이터 (ONDO) - 우수상', date: '2020.12' },
   ],
   education: [
     {
@@ -323,7 +325,9 @@ export const defaultPortfolioEn: PortfolioData = {
     },
   ],
   activities: [
-    { name: 'FEConf 2023', date: '2023' },
+    { name: 'FEConf TWIP Booth Operation', date: '2023.10' },
+    { name: 'Mock Interview & Mentoring for GSM Students', date: '2023' },
+    { name: 'JA Korea Entrepreneur\'s Playground (ONDO) - Excellence Award', date: '2020.12' },
   ],
   education: [
     {
