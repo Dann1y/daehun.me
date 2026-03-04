@@ -10,6 +10,7 @@ export function Navbar({ locale }: { locale: Locale }) {
   const navItems = {
     [`/${locale}`]: { name: dict.nav.home },
     [`/${locale}/blog`]: { name: dict.nav.blog },
+    [`/${locale}/portfolio`]: { name: dict.nav.portfolio },
   }
 
   return (

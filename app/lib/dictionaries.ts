@@ -8,6 +8,7 @@ const dictionaries = {
     nav: {
       home: "home",
       blog: "blog",
+      portfolio: "portfolio",
     },
     home: {
       title: "Who I am",
@@ -30,6 +31,7 @@ const dictionaries = {
       homeTitle: "Daehun Lee",
       homeDescription: "사고의 흐름을 기록합니다.",
       blogDescription: "사고, 쓰기, 공유하는 블로그",
+      portfolioDescription: "이대훈 포트폴리오",
       keywords: ["블로그", "사고", "쓰기", "공유"],
     },
     labels: {
@@ -41,6 +43,7 @@ const dictionaries = {
     nav: {
       home: "home",
       blog: "blog",
+      portfolio: "portfolio",
     },
     home: {
       title: "Who I am",
@@ -63,6 +66,7 @@ const dictionaries = {
       homeTitle: "Daehun Lee",
       homeDescription: "A blog about thinking, writing, and sharing.",
       blogDescription: "A blog about thinking, writing, and sharing.",
+      portfolioDescription: "Daehun Lee Portfolio",
       keywords: ["blog", "thinking", "writing", "sharing"],
     },
     labels: {
