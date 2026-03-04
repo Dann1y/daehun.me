@@ -1,4 +1,5 @@
 import { BlogPosts } from "app/components/posts";
+import { getBlogPosts } from "app/blog/utils";
 import { baseUrl } from "app/sitemap";
 import type { Metadata } from "next";
 
@@ -24,7 +25,7 @@ export default function Page() {
         <li>{`🧠 Think, Act, Learn, Repeat`}</li>
       </ul>
       <div className="my-8">
-        <BlogPosts />
+        <BlogPosts posts={getBlogPosts()} />
       </div>
     </section>
   );

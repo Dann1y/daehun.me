@@ -1,4 +1,5 @@
 import { BlogPosts } from 'app/components/posts'
+import { getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
 import type { Metadata } from 'next'
 
@@ -16,7 +17,7 @@ export default function Page() {
   return (
     <section className="flex flex-col flex-1">
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">My Blog</h1>
-      <BlogPosts />
+      <BlogPosts posts={getBlogPosts()} />
     </section>
   )
 }
