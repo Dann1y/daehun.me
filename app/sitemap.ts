@@ -52,6 +52,18 @@ export default async function sitemap() {
         },
       },
     },
+    {
+      url: `${baseUrl}/${locale}/portfolio`,
+      lastModified: new Date().toISOString().split('T')[0],
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+      alternates: {
+        languages: {
+          ko: `${baseUrl}/ko/portfolio`,
+          en: `${baseUrl}/en/portfolio`,
+        },
+      },
+    },
   ])
 
   return [...routes, ...blogs]
