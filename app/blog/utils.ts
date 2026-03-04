@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import type { Locale } from 'app/lib/dictionaries'
 
 type Metadata = {
   title: string
@@ -27,31 +28,35 @@ function parseFrontmatter(fileContent: string) {
   return { metadata: metadata as Metadata, content }
 }
 
-function getMDXFiles(dir) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx')
+function getPostDirs(dir: string) {
+  return fs
+    .readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
 }
 
-function readMDXFile(filePath) {
+function readMDXFile(filePath: string) {
   let rawContent = fs.readFileSync(filePath, 'utf-8')
   return parseFrontmatter(rawContent)
 }
 
-function getMDXData(dir) {
-  let mdxFiles = getMDXFiles(dir)
-  return mdxFiles.map((file) => {
-    let { metadata, content } = readMDXFile(path.join(dir, file))
-    let slug = path.basename(file, path.extname(file))
+export function getBlogPosts(locale: Locale = 'ko') {
+  let postsDir = path.join(process.cwd(), 'app', 'blog', 'posts')
+  let slugs = getPostDirs(postsDir)
 
-    return {
-      metadata,
-      slug,
-      content,
-    }
-  })
-}
-
-export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts'))
+  return slugs
+    .map((slug) => {
+      let localePath = path.join(postsDir, slug, `${locale}.mdx`)
+      // Fallback to other locale if current doesn't exist
+      if (!fs.existsSync(localePath)) {
+        let fallback = locale === 'ko' ? 'en' : 'ko'
+        localePath = path.join(postsDir, slug, `${fallback}.mdx`)
+        if (!fs.existsSync(localePath)) return null
+      }
+      let { metadata, content } = readMDXFile(localePath)
+      return { metadata, slug, content }
+    })
+    .filter(Boolean) as { metadata: Metadata; slug: string; content: string }[]
 }
 
 export { formatDate } from './format'

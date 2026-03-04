@@ -1,16 +1,17 @@
 import Link from 'next/link'
 import { ThemeToggle } from './theme-toggle'
+import { LocaleToggle } from './locale-toggle'
+import type { Locale } from 'app/lib/dictionaries'
+import { getDictionary } from 'app/lib/dictionaries'
 
-const navItems = {
-  '/': {
-    name: 'home',
-  },
-  '/blog': {
-    name: 'blog',
-  },
-}
+export function Navbar({ locale }: { locale: Locale }) {
+  const dict = getDictionary(locale)
 
-export function Navbar() {
+  const navItems = {
+    [`/${locale}`]: { name: dict.nav.home },
+    [`/${locale}/blog`]: { name: dict.nav.blog },
+  }
+
   return (
     <aside className="-ml-[8px] mb-16 tracking-tight">
       <div className="lg:sticky lg:top-20">
@@ -31,7 +32,10 @@ export function Navbar() {
               )
             })}
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-1">
+            <LocaleToggle />
+            <ThemeToggle />
+          </div>
         </nav>
       </div>
     </aside>

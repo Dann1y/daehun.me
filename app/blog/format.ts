@@ -1,4 +1,10 @@
-export function formatDate(date: string, includeRelative = false) {
+import type { Locale } from 'app/lib/dictionaries'
+
+export function formatDate(
+  date: string,
+  includeRelative = false,
+  locale: Locale = 'ko'
+) {
   let currentDate = new Date()
   if (!date.includes('T')) {
     date = `${date}T00:00:00`
@@ -11,17 +17,30 @@ export function formatDate(date: string, includeRelative = false) {
 
   let formattedDate = ''
 
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`
+  if (locale === 'ko') {
+    if (yearsAgo > 0) {
+      formattedDate = `${yearsAgo}년 전`
+    } else if (monthsAgo > 0) {
+      formattedDate = `${monthsAgo}개월 전`
+    } else if (daysAgo > 0) {
+      formattedDate = `${daysAgo}일 전`
+    } else {
+      formattedDate = '오늘'
+    }
   } else {
-    formattedDate = 'Today'
+    if (yearsAgo > 0) {
+      formattedDate = `${yearsAgo}y ago`
+    } else if (monthsAgo > 0) {
+      formattedDate = `${monthsAgo}mo ago`
+    } else if (daysAgo > 0) {
+      formattedDate = `${daysAgo}d ago`
+    } else {
+      formattedDate = 'Today'
+    }
   }
 
-  let fullDate = targetDate.toLocaleString('en-us', {
+  let localeStr = locale === 'ko' ? 'ko-KR' : 'en-US'
+  let fullDate = targetDate.toLocaleString(localeStr, {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
