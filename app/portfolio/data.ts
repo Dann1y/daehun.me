@@ -53,12 +53,7 @@ export const defaultPortfolioKo: PortfolioData = {
       '3.5년간 모빌리티·크리에이터 스타트업에서 프론트엔드 개발과 프로덕트 매니징을 경험했습니다.',
       '사용자 중심의 제품을 만들고, 데이터로 성과를 증명하는 것을 좋아합니다.',
     ],
-    links: [
-      { label: 'Blog', url: 'https://daehunlee.com' },
-      { label: 'GitHub', url: 'https://github.com/Dann1y' },
-      { label: 'LinkedIn', url: 'https://linkedin.com/in/danny-lee17' },
-      { label: 'Email', url: 'mailto:daehunlee.dev@gmail.com' },
-    ],
+    links: [],
   },
   experience: [
     {
@@ -238,12 +233,7 @@ export const defaultPortfolioEn: PortfolioData = {
       '3.5 years of experience in frontend development and product management at mobility and creator economy startups.',
       'Passionate about building user-centric products and proving impact through data.',
     ],
-    links: [
-      { label: 'Blog', url: 'https://daehunlee.com' },
-      { label: 'GitHub', url: 'https://github.com/Dann1y' },
-      { label: 'LinkedIn', url: 'https://linkedin.com/in/danny-lee17' },
-      { label: 'Email', url: 'mailto:daehunlee.dev@gmail.com' },
-    ],
+    links: [],
   },
   experience: [
     {
