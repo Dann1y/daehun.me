@@ -17,11 +17,6 @@ export interface ExperienceData {
   roles: RoleData[]
 }
 
-export interface CollaborationData {
-  role: string
-  description: string
-}
-
 export interface LinkData {
   label: string
   url: string
@@ -35,11 +30,6 @@ export interface PortfolioData {
     links: LinkData[]
   }
   experience: ExperienceData[]
-  skills: {
-    tech: string[]
-    collaboration: CollaborationData[]
-    communication: string[]
-  }
   opensource: { name: string; description: string }[]
   activities: { name: string; date: string }[]
   education: { name: string; period: string }[]
@@ -173,36 +163,6 @@ export const defaultPortfolioKo: PortfolioData = {
       ],
     },
   ],
-  skills: {
-    tech: [
-      'TypeScript',
-      'React',
-      'Next.js',
-      'Tailwind CSS',
-      'Monorepo (Turborepo)',
-      'CSR / SSR / SSG',
-      'React Query',
-      'Zustand',
-      'Storybook',
-      'Vitest',
-      'Playwright',
-    ],
-    collaboration: [
-      {
-        role: '프로덕트',
-        description: '사용자 리서치, A/B 테스트, 데이터 기반 의사결정',
-      },
-      {
-        role: '개발',
-        description: '코드 리뷰, 기술 문서화, CI/CD 파이프라인',
-      },
-    ],
-    communication: [
-      '비즈니스 임팩트를 고려한 기술 의사결정',
-      '크로스 펑셔널 팀 협업',
-      '기술적 복잡도를 비기술 이해관계자에게 설명',
-    ],
-  },
   opensource: [
     {
       name: 'vercel/turbo',
@@ -353,36 +313,6 @@ export const defaultPortfolioEn: PortfolioData = {
       ],
     },
   ],
-  skills: {
-    tech: [
-      'TypeScript',
-      'React',
-      'Next.js',
-      'Tailwind CSS',
-      'Monorepo (Turborepo)',
-      'CSR / SSR / SSG',
-      'React Query',
-      'Zustand',
-      'Storybook',
-      'Vitest',
-      'Playwright',
-    ],
-    collaboration: [
-      {
-        role: 'Product',
-        description: 'User research, A/B testing, data-driven decisions',
-      },
-      {
-        role: 'Engineering',
-        description: 'Code review, technical documentation, CI/CD pipelines',
-      },
-    ],
-    communication: [
-      'Technical decisions considering business impact',
-      'Cross-functional team collaboration',
-      'Explaining technical complexity to non-technical stakeholders',
-    ],
-  },
   opensource: [
     {
       name: 'vercel/turbo',

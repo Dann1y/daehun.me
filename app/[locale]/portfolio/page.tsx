@@ -160,46 +160,6 @@ export default async function PortfolioPage({
         ))}
       </div>
 
-      {/* Skills */}
-      <div className="mb-12">
-        <h2 className="text-xl font-semibold tracking-tight mb-4">Skills</h2>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {data.skills.tech.map((skill) => (
-            <span
-              key={skill}
-              className="text-sm px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-        {data.skills.collaboration.length > 0 && (
-          <div className="space-y-2 mb-4">
-            {data.skills.collaboration.map((c) => (
-              <div key={c.role} className="text-sm">
-                <span className="font-medium">{c.role}</span>
-                <span className="text-neutral-500 dark:text-neutral-400">
-                  {' '}
-                  — {c.description}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-        {data.skills.communication.length > 0 && (
-          <ul className="space-y-1">
-            {data.skills.communication.map((item, i) => (
-              <li
-                key={i}
-                className="text-sm text-neutral-600 dark:text-neutral-400"
-              >
-                · {item}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
       {/* Open Source */}
       {data.opensource.length > 0 && (
         <div className="mb-12">
