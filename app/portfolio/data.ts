@@ -175,7 +175,6 @@ export const defaultPortfolioKo: PortfolioData = {
   ],
   activities: [
     { name: 'FEConf 2023', date: '2023' },
-    { name: 'if(kakao)dev 2022', date: '2022' },
   ],
   education: [
     {
@@ -325,7 +324,6 @@ export const defaultPortfolioEn: PortfolioData = {
   ],
   activities: [
     { name: 'FEConf 2023', date: '2023' },
-    { name: 'if(kakao)dev 2022', date: '2022' },
   ],
   education: [
     {
