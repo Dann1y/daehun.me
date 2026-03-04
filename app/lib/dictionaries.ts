@@ -1,82 +1,79 @@
-export type Locale = 'ko' | 'en'
+export type Locale = "ko" | "en";
 
-export const locales: Locale[] = ['ko', 'en']
-export const defaultLocale: Locale = 'ko'
+export const locales: Locale[] = ["ko", "en"];
+export const defaultLocale: Locale = "ko";
 
 const dictionaries = {
   ko: {
     nav: {
-      home: 'home',
-      blog: 'blog',
+      home: "home",
+      blog: "blog",
     },
     home: {
-      title: 'Who I am',
+      title: "Who I am",
       items: [
-        '👨🏻‍💻 3.5 years of experience in Web Development & Product Management',
-        '📊 Building a financial ecosystem',
-        '🧠 Think, Act, Learn, Repeat',
+        "👨🏻‍💻 과거: 3.5년 동안 모빌리티 & 크리에이터 스타트업에서 FE & PM 경험",
+        "📊 현재: AI 금융 플랫폼 개발 & 오픈소스 기여",
+        "🧠 사고, 실행, 학습, 반복",
       ],
     },
     blog: {
-      title: 'My Blog',
-      allFilter: '전체',
+      title: "My Blog",
+      allFilter: "전체",
     },
     notFound: {
-      title: '404 - 페이지를 찾을 수 없습니다',
+      title: "404 - 페이지를 찾을 수 없습니다",
     },
     meta: {
-      siteTitle: 'Daehun Blog',
-      siteDescription: 'Think, Write, Share',
-      homeTitle: 'Daehun Lee — Developer & Product Manager',
-      homeDescription:
-        '웹 개발과 프로덕트 매니지먼트 경험을 바탕으로 생각하고, 쓰고, 공유하는 블로그.',
-      blogDescription: '개발, AI, 프로덕트에 대한 생각을 기록하는 블로그.',
-      keywords: ['블로그', '개발', '웹개발', 'AI', '프로덕트'],
+      siteTitle: "Daehun Blog",
+      siteDescription: "Think, Write, Share",
+      homeTitle: "Daehun Lee",
+      homeDescription: "사고의 흐름을 기록합니다.",
+      blogDescription: "사고, 쓰기, 공유하는 블로그",
+      keywords: ["블로그", "사고", "쓰기", "공유"],
     },
     labels: {
-      '논문': '논문',
-      '생각': '생각',
+      논문: "논문",
+      생각: "생각",
     } as Record<string, string>,
   },
   en: {
     nav: {
-      home: 'home',
-      blog: 'blog',
+      home: "home",
+      blog: "blog",
     },
     home: {
-      title: 'Who I am',
+      title: "Who I am",
       items: [
-        '👨🏻‍💻 3.5 years of experience in Web Development & Product Management',
-        '📊 Building a financial ecosystem',
-        '🧠 Think, Act, Learn, Repeat',
+        "👨🏻‍💻 Previously: 3.5 years as a FE & PM in the mobility & creator industry",
+        "📊 Currently: Building AI financial platform & Contributing to open-source",
+        "🧠 Think, Act, Learn, Repeat",
       ],
     },
     blog: {
-      title: 'My Blog',
-      allFilter: 'All',
+      title: "My Blog",
+      allFilter: "All",
     },
     notFound: {
-      title: '404 - Page Not Found',
+      title: "404 - Page Not Found",
     },
     meta: {
-      siteTitle: 'Daehun Blog',
-      siteDescription: 'Think, Write, Share',
-      homeTitle: 'Daehun Lee — Developer & Product Manager',
-      homeDescription:
-        'A blog about thinking, writing, and sharing based on web development and product management experience.',
-      blogDescription:
-        'A blog documenting thoughts on development, AI, and products.',
-      keywords: ['blog', 'development', 'web development', 'AI', 'product'],
+      siteTitle: "Daehun Blog",
+      siteDescription: "Think, Write, Share",
+      homeTitle: "Daehun Lee",
+      homeDescription: "A blog about thinking, writing, and sharing.",
+      blogDescription: "A blog about thinking, writing, and sharing.",
+      keywords: ["blog", "thinking", "writing", "sharing"],
     },
     labels: {
-      '논문': 'Paper',
-      '생각': 'Thoughts',
+      논문: "Paper",
+      생각: "Thoughts",
     } as Record<string, string>,
   },
-} as const
+} as const;
 
-export type Dictionary = (typeof dictionaries)[Locale]
+export type Dictionary = (typeof dictionaries)[Locale];
 
 export function getDictionary(locale: Locale) {
-  return dictionaries[locale]
+  return dictionaries[locale];
 }
