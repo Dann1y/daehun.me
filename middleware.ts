@@ -11,9 +11,15 @@ export function middleware(request: NextRequest) {
 
   if (hasLocale) return
 
-  // Redirect to default locale
+  // Detect locale from Accept-Language header
+  const acceptLang = request.headers.get('accept-language') ?? ''
+  const preferKo = acceptLang.split(',').some((lang) =>
+    lang.trim().toLowerCase().startsWith('ko')
+  )
+  const detectedLocale = preferKo ? 'ko' : 'en'
+
   const url = request.nextUrl.clone()
-  url.pathname = `/${defaultLocale}${pathname}`
+  url.pathname = `/${detectedLocale}${pathname}`
   return NextResponse.redirect(url)
 }
 
