@@ -52,24 +52,27 @@ export const defaultPortfolioKo: PortfolioData = {
       roles: [
         {
           title: 'Product Manager',
-          period: '2025.01 — 2025.02',
+          period: '2024.12 — 2025.02',
           projects: [
             {
               name: 'SWING 교통카드',
               period: '2025.01 — 2025.02',
-              description: '업계 최초 무제한 환급 모델 기획',
+              description: '업계 최초 교통비 무제한 환급 모델 기획',
               achievements: [
                 '무제한 환급 비즈니스 모델 기획 및 프로덕트 설계',
                 '사용자 리서치 기반 핵심 기능 정의',
               ],
             },
             {
-              name: 'SWING TAXI',
-              period: '2025.01 — 2025.02',
-              description: '택시 호출 서비스 PM',
+              name: 'SWING BIKE',
+              period: '2024.12 — 2025.02',
+              description: '이륜차 리스 사업 ERP 설계',
               achievements: [
-                '택시 서비스 런칭 전략 수립',
-                '드라이버·라이더 양면 플랫폼 설계',
+                'B2C 고객 대상 17종의 오토바이 리스 서비스를 제공하는 웹 사이트 제작',
+                'B2B 고객 대상의 주문, 정산, 재고를 관리하는 어드민 페이지 개편',
+                '재고 상태와 정산 금액이 맞지 않던 문제를 데이터 정규화를 통해 해결',
+                '200억 매출 사업의 데이터 정합성을 검증하고 영업지원팀의 리소스 절감',
+                '렌탈 사업의 자금 조달을 위해 투자사에 서비스 피칭',
               ],
             },
           ],
@@ -80,21 +83,16 @@ export const defaultPortfolioKo: PortfolioData = {
           projects: [
             {
               name: 'SWAP',
-              period: '2024.09 — 2024.12',
+              period: '2024.08 — 2024.12',
               description: '구독형 모빌리티 서비스',
               achievements: [
-                '구독자 800 → 2,700명 (225% 성장)',
-                '월 매출 150% 증가',
                 'Next.js + Tailwind 기반 서비스 프론트엔드 개발',
-              ],
-            },
-            {
-              name: 'SWING BIKE',
-              period: '2024.08 — 2024.12',
-              description: '공유 자전거 서비스',
-              achievements: [
-                '연 매출 200억 서비스 프론트엔드 유지보수',
-                '레거시 코드 리팩토링 및 성능 최적화',
+                '프로모션 페이지 제작으로 신규 유저 유입 수 증가',
+                'SEO를 통해 SWAP, 전기자전거 구독 관련 키워드 상위 노출 달성',
+                'Clarity 도입으로 유저 행동을 수집해 프로모션 기획 시 특정 유저를 타겟할 경우 활용',
+                '월 매출 150% 증가 | 구독자 225% 성장',
+                '주문, 재고, 배송을 관리하는 어드민 페이지 유지보수',
+                '결제 내역 및 미납관리 개발로 현재 미납 유저 현황 파악',
               ],
             },
           ],
@@ -117,17 +115,18 @@ export const defaultPortfolioKo: PortfolioData = {
                 'NPS 조사: 크리에이터 94%, 시청자 92%',
                 '유료 전환율 50% → 75% 개선',
                 '번들 사이즈 11% 감소',
-                'React + TypeScript 기반 SPA 아키텍처 설계',
+                'Next.js + TypeScript 기반 SSR 아키텍처 설계',
+                'i18n 적용으로 14%의 해외 사용자분들께 영어로 후원페이지를 사용할 수 있도록 제공',
+                '서비스 배포 파이프라인 최적화로 배포 시간 60% 감소',
               ],
             },
             {
               name: '뽑기 후원',
-              period: '2022.06 — 2023.01',
-              description: '인터랙티브 후원 기능',
+              period: '2023.09 — 2023.11',
+              description: '인터랙티브 뽑기 후원 기능',
               achievements: [
-                '누적 13,000건 후원 처리',
-                '300명+ 크리에이터 사용',
-                'Canvas API 기반 인터랙티브 UI 개발',
+                '뽑기 후원 1만 3천 건, 뽑기 후원받은 크리에이터 300명',
+                '타 후원 기능 대비 ARPPU 지표가 높았고, 가설 검증 성공',
               ],
             },
             {
@@ -135,23 +134,22 @@ export const defaultPortfolioKo: PortfolioData = {
               period: '2022.01 — 2022.06',
               description: 'VOD·클립 서비스',
               achievements: [
-                'MAU 50,000 달성',
+                '초기 MAU 50,000 달성',
                 '유료 구독 MoM +257% 성장',
-                'HLS 스트리밍 플레이어 개발',
+                '월 평균 1만 ~ 2만개의 클립 달성',
               ],
             },
             {
               name: 'Design System',
-              period: '2022.03 — 2022.12',
+              period: '2021.12 — 2024.05',
               description: '사내 디자인 시스템',
               achievements: [
                 'Storybook 기반 컴포넌트 라이브러리 구축',
-                'Monorepo(Turborepo) 아키텍처 설계',
               ],
             },
             {
               name: 'Events',
-              period: '2021.09 — 2022.03',
+              period: '2022.12',
               description: '이벤트 페이지 개발',
               achievements: [
                 '프로모션·이벤트 랜딩 페이지 개발',
@@ -203,24 +201,27 @@ export const defaultPortfolioEn: PortfolioData = {
       roles: [
         {
           title: 'Product Manager',
-          period: '2025.01 — 2025.02',
+          period: '2024.12 — 2025.02',
           projects: [
             {
               name: 'SWING Transit Card',
               period: '2025.01 — 2025.02',
-              description: 'Industry-first unlimited cashback model',
+              description: 'Industry-first unlimited transit fare cashback model',
               achievements: [
                 'Designed unlimited cashback business model and product strategy',
                 'Defined core features based on user research',
               ],
             },
             {
-              name: 'SWING TAXI',
-              period: '2025.01 — 2025.02',
-              description: 'Ride-hailing service PM',
+              name: 'SWING BIKE',
+              period: '2024.12 — 2025.02',
+              description: 'Motorcycle lease business ERP design',
               achievements: [
-                'Established taxi service launch strategy',
-                'Designed two-sided platform for drivers and riders',
+                'Built B2C website offering 17 motorcycle lease models',
+                'Revamped B2B admin page for order, settlement, and inventory management',
+                'Resolved inventory-settlement data mismatch through data normalization',
+                'Validated data integrity for ₩20B revenue business, reducing sales support team workload',
+                'Pitched service to investors for rental business funding',
               ],
             },
           ],
@@ -231,21 +232,16 @@ export const defaultPortfolioEn: PortfolioData = {
           projects: [
             {
               name: 'SWAP',
-              period: '2024.09 — 2024.12',
+              period: '2024.08 — 2024.12',
               description: 'Subscription-based mobility service',
               achievements: [
-                'Subscribers 800 → 2,700 (225% growth)',
-                'Monthly revenue +150%',
                 'Built service frontend with Next.js + Tailwind',
-              ],
-            },
-            {
-              name: 'SWING BIKE',
-              period: '2024.08 — 2024.12',
-              description: 'Shared bicycle service',
-              achievements: [
-                'Maintained frontend for ₩20B annual revenue service',
-                'Legacy code refactoring and performance optimization',
+                'Increased new user acquisition through promotion pages',
+                'Achieved top search rankings for SWAP and e-bike subscription keywords via SEO',
+                'Introduced Clarity to collect user behavior data for targeted promotions',
+                'Monthly revenue +150% | Subscribers +225% growth',
+                'Maintained admin page for order, inventory, and delivery management',
+                'Built payment history and delinquency management for user status tracking',
               ],
             },
           ],
@@ -268,17 +264,18 @@ export const defaultPortfolioEn: PortfolioData = {
                 'NPS: Creators 94%, Viewers 92%',
                 'Paid conversion rate 50% → 75%',
                 'Bundle size reduced by 11%',
-                'Architected React + TypeScript SPA',
+                'Architected Next.js + TypeScript SSR application',
+                'Enabled English donation pages for 14% international users via i18n',
+                'Reduced deployment time by 60% through pipeline optimization',
               ],
             },
             {
               name: 'Gacha Donation',
-              period: '2022.06 — 2023.01',
-              description: 'Interactive donation feature',
+              period: '2023.09 — 2023.11',
+              description: 'Interactive gacha donation feature',
               achievements: [
-                '13,000+ cumulative donations processed',
-                '300+ creators adopted',
-                'Built interactive UI with Canvas API',
+                '13,000 gacha donations, 300 creators adopted',
+                'Higher ARPPU than other donation features, hypothesis validated',
               ],
             },
             {
@@ -286,23 +283,22 @@ export const defaultPortfolioEn: PortfolioData = {
               period: '2022.01 — 2022.06',
               description: 'VOD and clip service',
               achievements: [
-                'Reached 50,000 MAU',
+                'Reached 50,000 initial MAU',
                 'Paid subscriptions MoM +257%',
-                'Developed HLS streaming player',
+                'Achieved 10,000–20,000 monthly clips on average',
               ],
             },
             {
               name: 'Design System',
-              period: '2022.03 — 2022.12',
+              period: '2021.12 — 2024.05',
               description: 'Internal design system',
               achievements: [
                 'Built Storybook-based component library',
-                'Designed Monorepo (Turborepo) architecture',
               ],
             },
             {
               name: 'Events',
-              period: '2021.09 — 2022.03',
+              period: '2022.12',
               description: 'Event page development',
               achievements: [
                 'Built promotion and event landing pages',
