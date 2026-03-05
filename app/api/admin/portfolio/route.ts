@@ -53,6 +53,7 @@ export async function PUT(request: NextRequest) {
     await put(key, JSON.stringify(data), {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: true,
     })
     return NextResponse.json({ success: true })
   } catch (err) {
