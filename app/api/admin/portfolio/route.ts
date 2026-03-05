@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { put, head } from '@vercel/blob'
+import { put, list } from '@vercel/blob'
 import { verifyAuth } from 'app/lib/admin-auth'
 import {
   defaultPortfolioKo,
@@ -21,8 +21,9 @@ async function readFromBlob(locale: string): Promise<PortfolioData | null> {
   try {
     const key = BLOB_KEYS[locale]
     if (!key) return null
-    const blob = await head(key)
-    const res = await fetch(blob.url)
+    const { blobs } = await list({ prefix: key, limit: 1 })
+    if (blobs.length === 0) return null
+    const res = await fetch(blobs[0].url)
     return (await res.json()) as PortfolioData
   } catch {
     return null
@@ -47,11 +48,15 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid locale' }, { status: 400 })
   }
 
-  const data = await request.json()
-  await put(key, JSON.stringify(data), {
-    access: 'public',
-    addRandomSuffix: false,
-  })
-
-  return NextResponse.json({ success: true })
+  try {
+    const data = await request.json()
+    await put(key, JSON.stringify(data), {
+      access: 'public',
+      addRandomSuffix: false,
+    })
+    return NextResponse.json({ success: true })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error'
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
 }

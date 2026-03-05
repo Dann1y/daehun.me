@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { Locale } from 'app/lib/dictionaries'
 import { getDictionary, locales } from 'app/lib/dictionaries'
 import { baseUrl } from 'app/sitemap'
-import { head } from '@vercel/blob'
+import { list } from '@vercel/blob'
 import {
   defaultPortfolioKo,
   defaultPortfolioEn,
@@ -25,9 +25,11 @@ async function getPortfolioData(locale: string): Promise<PortfolioData> {
   try {
     const key = BLOB_KEYS[locale]
     if (key) {
-      const blob = await head(key)
-      const res = await fetch(blob.url, { cache: 'no-store' })
-      if (res.ok) return (await res.json()) as PortfolioData
+      const { blobs } = await list({ prefix: key, limit: 1 })
+      if (blobs.length > 0) {
+        const res = await fetch(blobs[0].url, { cache: 'no-store' })
+        if (res.ok) return (await res.json()) as PortfolioData
+      }
     }
   } catch {
     // Blob not configured or not found — use default

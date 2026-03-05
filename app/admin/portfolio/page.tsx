@@ -40,8 +40,12 @@ export default function AdminPortfolioPage() {
         router.push('/admin/login')
         return
       }
-      if (res.ok) setMessage('Saved!')
-      else setMessage('Save failed')
+      if (res.ok) {
+        setMessage('Saved!')
+      } else {
+        const body = await res.json().catch(() => null)
+        setMessage(`Save failed: ${body?.error ?? res.status}`)
+      }
     } catch {
       setMessage('Network error')
     } finally {
