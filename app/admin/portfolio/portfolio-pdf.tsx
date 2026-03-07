@@ -230,19 +230,17 @@ function PortfolioPdfDocument({
           <>
             <Text style={s.sectionTitle}>Projects</Text>
             <View style={{ marginTop: 4 }}>
-              {data.projects.flatMap((exp) =>
-                exp.roles.flatMap((role) => role.projects)
-              ).map((project, i) => (
+              {data.projects.map((p, i) => (
                 <View key={i} style={{ flexDirection: 'row', marginBottom: 3 }}>
                   <Text style={{ fontSize: 9, fontWeight: 600, minWidth: 100 }}>
-                    {project.name}
+                    {p.name}
                   </Text>
                   <Text style={{ fontSize: 9, color: colors.muted, flex: 1 }}>
-                    {project.description}
+                    {p.description}
                   </Text>
-                  {project.period && (
+                  {p.period && (
                     <Text style={{ fontSize: 8, color: colors.light, marginLeft: 8 }}>
-                      {project.period}
+                      {p.period}
                     </Text>
                   )}
                 </View>

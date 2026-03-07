@@ -31,8 +31,8 @@ async function getPortfolioData(locale: string): Promise<PortfolioData> {
         const res = await fetch(blobs[0].url, { cache: 'no-store' })
         if (res.ok) {
           const json = (await res.json()) as PortfolioData
-          // Migrate old { name, description } projects to ExperienceData[]
-          if (json.projects?.length && !('roles' in json.projects[0])) {
+          // Migrate old ExperienceData[] projects to simple format
+          if (json.projects?.length && 'roles' in json.projects[0]) {
             json.projects = []
           }
           return json
@@ -108,70 +108,24 @@ export default async function PortfolioPage({
       {/* Projects */}
       {data.projects && data.projects.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-xl font-semibold tracking-tight mb-1">
+          <h2 className="text-xl font-semibold tracking-tight mb-4">
             Projects
           </h2>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6">
-            {getTotalDuration(data.projects, locale)}
-          </p>
-          {data.projects.map((exp) => (
-            <div key={exp.company} className="mb-10">
-              <div className="mb-3">
-                <h3 className="text-lg font-semibold">{exp.company}</h3>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                  {exp.description}
-                  {exp.duration && (
-                    <span> · {exp.duration}</span>
-                  )}
-                </p>
+          <div className="space-y-2">
+            {data.projects.map((p) => (
+              <div key={p.name} className="text-sm">
+                <span className="font-medium">{p.name}</span>
+                <span className="text-neutral-500 dark:text-neutral-400">
+                  {' '}&mdash; {p.description}
+                </span>
+                {p.period && (
+                  <span className="text-neutral-400 dark:text-neutral-500 text-xs ml-2">
+                    {p.period}
+                  </span>
+                )}
               </div>
-              <div className="border-l-2 border-neutral-200 dark:border-neutral-700 ml-2 pl-6 space-y-6">
-                {exp.roles.map((role) => (
-                  <div key={role.title + role.period}>
-                    <div className="relative">
-                      <div className="absolute -left-[30px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-400 dark:bg-neutral-500" />
-                      <h4 className="font-medium">{role.title}</h4>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-3">
-                        {role.period}
-                      </p>
-                    </div>
-                    <div className="space-y-3">
-                      {role.projects.map((project) => (
-                        <div
-                          key={project.name}
-                          className="group rounded-lg border border-neutral-200 dark:border-neutral-700 p-4 transition-all hover:shadow-md hover:-translate-y-0.5"
-                        >
-                          <div className="flex items-baseline justify-between mb-1">
-                            <h5 className="font-medium text-sm">
-                              {project.name}
-                            </h5>
-                            {project.period && (
-                              <span className="text-xs text-neutral-400 dark:text-neutral-500 ml-2 shrink-0">
-                                {project.period}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-2">
-                            {project.description}
-                          </p>
-                          <ul className="list-disc list-outside pl-4 space-y-1">
-                            {project.achievements.map((ach, i) => (
-                              <li
-                                key={i}
-                                className="text-sm text-neutral-700 dark:text-neutral-300"
-                              >
-                                {ach}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
 

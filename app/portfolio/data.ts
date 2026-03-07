@@ -31,7 +31,7 @@ export interface PortfolioData {
     links: LinkData[]
   }
   experience: ExperienceData[]
-  projects: ExperienceData[]
+  projects: { name: string; description: string; period?: string }[]
   opensource: { name: string; description: string }[]
   activities: { name: string; date: string }[]
   education: { name: string; period: string }[]
