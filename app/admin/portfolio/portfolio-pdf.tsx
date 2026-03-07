@@ -186,7 +186,7 @@ function getTotalDuration(
         const [sy, sm] = parts[0].split('.').map(Number)
         const [ey, em] = parts[1].split('.').map(Number)
         const start = sy * 12 + sm
-        const end = ey * 12 + em
+        const end = ey * 12 + em + 1
         if (start < minStart) minStart = start
         if (end > maxEnd) maxEnd = end
       }
