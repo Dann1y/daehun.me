@@ -10,6 +10,7 @@ export default function AdminPortfolioPage() {
   const [tab, setTab] = useState<Tab>('ko')
   const [data, setData] = useState<PortfolioData | null>(null)
   const [saving, setSaving] = useState(false)
+  const [generating, setGenerating] = useState(false)
   const [message, setMessage] = useState('')
   const router = useRouter()
 
@@ -64,6 +65,20 @@ export default function AdminPortfolioPage() {
   async function handleLogout() {
     await fetch('/api/admin/auth', { method: 'DELETE' })
     router.push('/admin/login')
+  }
+
+  async function handleExportPdf() {
+    if (!data) return
+    setGenerating(true)
+    try {
+      const { generatePortfolioPdf } = await import('./portfolio-pdf')
+      await generatePortfolioPdf(data, tab)
+    } catch {
+      setMessage('PDF generation failed')
+      setTimeout(() => setMessage(''), 2000)
+    } finally {
+      setGenerating(false)
+    }
   }
 
   if (!data) return <div className="p-8 text-sm">Loading...</div>
@@ -706,6 +721,13 @@ export default function AdminPortfolioPage() {
           className="px-4 py-2 rounded-lg bg-neutral-900 dark:bg-neutral-100 text-white dark:text-black text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
         >
           {saving ? 'Saving...' : 'Save'}
+        </button>
+        <button
+          onClick={handleExportPdf}
+          disabled={generating}
+          className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50"
+        >
+          {generating ? 'Generating...' : 'Export PDF'}
         </button>
         {message && (
           <span className="text-sm text-neutral-500">{message}</span>
