@@ -195,19 +195,28 @@ export const defaultPortfolioKo: PortfolioData = {
 export const defaultPortfolioEn: PortfolioData = {
   intro: {
     name: 'Daehun Lee',
-    title: 'Frontend Developer & PM',
+    title: 'Founder of Lindy Operation | ex- FE & PM',
     description: [
       '3.5 years of experience in frontend development and product management at mobility and creator economy startups.',
-      'Passionate about building user-centric products and proving impact through data.',
+      'Founded Lindy Operation, building an AI-powered wealth management platform.',
     ],
-    links: [],
+    links: [
+      { label: 'Blog', url: 'https://daehunlee.com' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/danny-lee17' },
+      { label: 'Github', url: 'https://github.com/Dann1y' },
+    ],
+    pdfContact: { phone: '010-2613-2274', email: 'leedanny0102@gmail.com' },
   },
-  projects: [],
+  projects: [
+    { name: 'T1 Home Ground 2025', description: 'Landing page & VIP invitation | 70K+ cumulative users', period: '2025', url: 'https://t1-homeground.gg' },
+    { name: 'Gelato Pique', description: 'Inventory dashboard enhancement | LE SSERAFIM collab event page', period: '2025', url: 'https://www.gelatopique.co.kr/main' },
+  ],
   experience: [
     {
       company: 'THE SWING',
       description: 'Mobility platform startup',
-      duration: '7 mos',
+      duration: '2024.08 - 2025.02',
+      url: 'https://swingmobility.co/',
       roles: [
         {
           title: 'Product Manager',
@@ -217,20 +226,22 @@ export const defaultPortfolioEn: PortfolioData = {
               name: 'SWING Transit Card',
               period: '2025.01 — 2025.02',
               description: 'Industry-first unlimited transit fare cashback model',
+              url: 'https://apps.apple.com/us/app/%EC%8A%A4%EC%9C%99-%ED%83%9D%EC%8B%9C-%EC%9E%90%EC%A0%84%EA%B1%B0-%ED%82%A5%EB%B3%B4%EB%93%9C/id1459344011?l=ko',
               achievements: [
                 'Designed unlimited cashback business model and product strategy',
-                'Defined core features based on user research',
+                'Defined core features through user research',
               ],
             },
             {
               name: 'SWING BIKE',
               period: '2024.12 — 2025.02',
-              description: 'Motorcycle lease business ERP design',
+              description: 'Motorcycle lease business ERP',
+              url: 'https://swapswap.kr/motorcycle',
               achievements: [
                 'Built B2C website offering 17 motorcycle lease models',
-                'Revamped B2B admin page for order, settlement, and inventory management',
+                'Revamped B2B admin for order, settlement, and inventory management',
                 'Resolved inventory-settlement data mismatch through data normalization',
-                'Validated data integrity for ₩20B revenue business, reducing sales support team workload',
+                'Validated data integrity for KRW 20B revenue business; reduced sales support workload',
                 'Pitched service to investors for rental business funding',
               ],
             },
@@ -244,14 +255,15 @@ export const defaultPortfolioEn: PortfolioData = {
               name: 'SWAP',
               period: '2024.08 — 2024.12',
               description: 'Subscription-based mobility service',
+              url: 'https://swapswap.kr',
               achievements: [
-                'Built service frontend with Next.js + Tailwind',
-                'Increased new user acquisition through promotion pages',
-                'Achieved top search rankings for SWAP and e-bike subscription keywords via SEO',
-                'Introduced Clarity to collect user behavior data for targeted promotions',
-                'Monthly revenue +150% | Subscribers +225% growth',
-                'Maintained admin page for order, inventory, and delivery management',
-                'Built payment history and delinquency management for user status tracking',
+                'Built service frontend with Next.js + Tailwind CSS',
+                'Drove new user acquisition through promotion landing pages',
+                'Achieved top search rankings for e-bike subscription keywords via SEO',
+                'Integrated Clarity for user behavior analytics to inform targeted promotions',
+                'Monthly revenue +150% | Subscribers +225%',
+                'Maintained admin dashboard for order, inventory, and delivery management',
+                'Built payment history and delinquency management system',
               ],
             },
           ],
@@ -261,7 +273,7 @@ export const defaultPortfolioEn: PortfolioData = {
     {
       company: 'EJN (TWIP)',
       description: 'Creator economy startup',
-      duration: '2 yrs 9 mos',
+      duration: '2021.09 - 2024.06',
       roles: [
         {
           title: 'Frontend Developer',
@@ -273,20 +285,20 @@ export const defaultPortfolioEn: PortfolioData = {
               description: 'Donation platform renewal',
               achievements: [
                 'NPS: Creators 94%, Viewers 92%',
-                'Paid conversion rate 50% → 75%',
-                'Bundle size reduced by 11%',
-                'Architected Next.js + TypeScript SSR application',
-                'Enabled English donation pages for 14% international users via i18n',
-                'Reduced deployment time by 60% through pipeline optimization',
+                'Improved paid conversion rate from 50% to 75%',
+                'Reduced bundle size by 11%',
+                'Architected SSR application with Next.js + TypeScript',
+                'Served English donation pages for 14% international users via i18n',
+                'Cut deployment time by 60% through CI/CD pipeline optimization',
               ],
             },
             {
               name: 'Gacha Donation',
               period: '2023.09 — 2023.11',
-              description: 'Interactive gacha donation feature',
+              description: 'Interactive gacha-style donation feature',
               achievements: [
-                '13,000 gacha donations, 300 creators adopted',
-                'Higher ARPPU than other donation features, hypothesis validated',
+                '13,000 gacha donations across 300 creators',
+                'Achieved highest ARPPU among donation features; validated product hypothesis',
               ],
             },
             {
@@ -296,7 +308,7 @@ export const defaultPortfolioEn: PortfolioData = {
               achievements: [
                 'Reached 50,000 initial MAU',
                 'Paid subscriptions MoM +257%',
-                'Achieved 10,000–20,000 monthly clips on average',
+                'Averaged 10,000-20,000 monthly clips',
               ],
             },
             {
@@ -310,10 +322,10 @@ export const defaultPortfolioEn: PortfolioData = {
             {
               name: 'Events',
               period: '2022.12',
-              description: 'Event page development',
+              description: 'Event landing pages',
               achievements: [
-                'Built promotion and event landing pages',
-                'Optimized conversion with A/B testing',
+                'Developed promotion and event landing pages',
+                'Optimized conversion rates through A/B testing',
               ],
             },
           ],
@@ -322,23 +334,20 @@ export const defaultPortfolioEn: PortfolioData = {
     },
   ],
   opensource: [
-    {
-      name: 'vercel/turbo',
-      description: 'Contributed to Turborepo build system',
-    },
-    {
-      name: 'gpt-tuning-node',
-      description: 'GPT fine-tuning Node.js library',
-    },
+    { name: 'vercel/turbo', description: 'Contributed to Turborepo build system', url: 'https://github.com/vercel/turborepo' },
+    { name: 'gpt-tuning-node', description: 'GPT fine-tuning Node.js library', url: 'https://github.com/Dann1y/gpt-tuning-node' },
+    { name: 'claude-usage-monitor', description: 'Real-time Claude usage tracker for macOS menu bar', url: 'https://github.com/Dann1y/claude-usage-monitor' },
+    { name: 'squisher', description: 'Rust TUI-based file compression library (PDF, PNG, JPG)', url: 'https://github.com/Dann1y/squisher' },
+    { name: 'flash-pump-engine', description: 'Auto-launches memecoins on pump.fun from x.com trends', url: 'https://github.com/Dann1y/flash-pump-engine' },
   ],
   activities: [
     { name: 'FEConf TWIP Booth Operation', date: '2023.10' },
     { name: 'Mock Interview & Mentoring for GSM Students', date: '2023' },
-    { name: 'JA Korea Entrepreneur\'s Playground (ONDO) - Excellence Award', date: '2020.12' },
+    { name: 'JA Korea Entrepreneur\'s Playground (ONDO) — Excellence Award', date: '2020.12' },
   ],
   education: [
     {
-      name: 'Gwangju Software Meister High School (GSM)',
+      name: 'Gwangju Software Meister High School',
       period: '2019.03 — 2022.01',
     },
   ],
