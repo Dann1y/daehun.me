@@ -3,6 +3,7 @@ export interface ProjectData {
   period?: string
   description: string
   achievements: string[]
+  url?: string
 }
 
 export interface RoleData {
@@ -15,6 +16,7 @@ export interface ExperienceData {
   company: string
   description: string
   duration?: string
+  url?: string
   roles: RoleData[]
 }
 
@@ -31,7 +33,7 @@ export interface PortfolioData {
     links: LinkData[]
   }
   experience: ExperienceData[]
-  projects: { name: string; description: string; period?: string }[]
+  projects: { name: string; description: string; period?: string; url?: string }[]
   opensource: { name: string; description: string }[]
   activities: { name: string; date: string }[]
   education: { name: string; period: string }[]

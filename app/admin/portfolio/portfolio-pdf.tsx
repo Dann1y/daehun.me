@@ -130,7 +130,11 @@ function ExperienceBlock({ data }: { data: ExperienceData[] }) {
       {data.map((exp, ei) => (
         <View key={ei} style={{ marginBottom: 12 }} wrap={false}>
           <View style={s.companyRow}>
-            <Text style={s.companyName}>{exp.company}</Text>
+            {exp.url ? (
+              <Link src={exp.url} style={s.companyName}>{exp.company}</Link>
+            ) : (
+              <Text style={s.companyName}>{exp.company}</Text>
+            )}
             <Text style={s.companyDesc}>
               {exp.description}
               {exp.duration ? ` · ${exp.duration}` : ''}
@@ -143,7 +147,11 @@ function ExperienceBlock({ data }: { data: ExperienceData[] }) {
               {role.projects.map((project, pi) => (
                 <View key={pi} style={s.projectCard} wrap={false}>
                   <View style={s.projectHeader}>
-                    <Text style={s.projectName}>{project.name}</Text>
+                    {project.url ? (
+                      <Link src={project.url} style={s.projectName}>{project.name}</Link>
+                    ) : (
+                      <Text style={s.projectName}>{project.name}</Text>
+                    )}
                     {project.period && (
                       <Text style={s.projectPeriod}>{project.period}</Text>
                     )}
@@ -232,9 +240,15 @@ function PortfolioPdfDocument({
             <View style={{ marginTop: 4 }}>
               {data.projects.map((p, i) => (
                 <View key={i} style={{ flexDirection: 'row', marginBottom: 3 }}>
-                  <Text style={{ fontSize: 9, fontWeight: 600, minWidth: 100 }}>
-                    {p.name}
-                  </Text>
+                  {p.url ? (
+                    <Link src={p.url} style={{ fontSize: 9, fontWeight: 600, minWidth: 100, color: colors.black, textDecoration: 'underline' }}>
+                      {p.name}
+                    </Link>
+                  ) : (
+                    <Text style={{ fontSize: 9, fontWeight: 600, minWidth: 100 }}>
+                      {p.name}
+                    </Text>
+                  )}
                   <Text style={{ fontSize: 9, color: colors.muted, flex: 1 }}>
                     {p.description}
                   </Text>

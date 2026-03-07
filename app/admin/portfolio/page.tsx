@@ -238,6 +238,15 @@ export default function AdminPortfolioPage() {
                   setData({ ...data, projects })
                 }}
               />
+              <Field
+                label="URL"
+                value={p.url ?? ''}
+                onChange={(v) => {
+                  const projects = [...(data.projects ?? [])]
+                  projects[i] = { ...p, url: v }
+                  setData({ ...data, projects })
+                }}
+              />
             </div>
             <RemoveButton
               onClick={() =>
@@ -289,6 +298,13 @@ export default function AdminPortfolioPage() {
                   value={exp.duration ?? ''}
                   onChange={(v) =>
                     updateExperience(ei, { ...exp, duration: v })
+                  }
+                />
+                <Field
+                  label="URL"
+                  value={exp.url ?? ''}
+                  onChange={(v) =>
+                    updateExperience(ei, { ...exp, url: v })
                   }
                 />
               </div>
@@ -360,6 +376,16 @@ export default function AdminPortfolioPage() {
                             updateProject(ei, ri, pi, {
                               ...project,
                               description: v,
+                            })
+                          }
+                        />
+                        <Field
+                          label="URL"
+                          value={project.url ?? ''}
+                          onChange={(v) =>
+                            updateProject(ei, ri, pi, {
+                              ...project,
+                              url: v,
                             })
                           }
                         />

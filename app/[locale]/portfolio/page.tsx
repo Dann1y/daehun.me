@@ -114,7 +114,13 @@ export default async function PortfolioPage({
           <div className="space-y-2">
             {data.projects.map((p) => (
               <div key={p.name} className="text-sm">
-                <span className="font-medium">{p.name}</span>
+                {p.url ? (
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-2 decoration-neutral-300 dark:decoration-neutral-600 hover:decoration-neutral-500">
+                    {p.name}
+                  </a>
+                ) : (
+                  <span className="font-medium">{p.name}</span>
+                )}
                 <span className="text-neutral-500 dark:text-neutral-400">
                   {' '}&mdash; {p.description}
                 </span>
@@ -160,7 +166,13 @@ export default async function PortfolioPage({
         {data.experience.map((exp) => (
           <div key={exp.company} className="mb-10">
             <div className="mb-3">
-              <h3 className="text-lg font-semibold">{exp.company}</h3>
+              <h3 className="text-lg font-semibold">
+                    {exp.url ? (
+                      <a href={exp.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-neutral-300 dark:decoration-neutral-600 hover:decoration-neutral-500">
+                        {exp.company}
+                      </a>
+                    ) : exp.company}
+                  </h3>
               <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 {exp.description}
                 {exp.duration && (
@@ -186,7 +198,11 @@ export default async function PortfolioPage({
                       >
                         <div className="flex items-baseline justify-between mb-1">
                           <h5 className="font-medium text-sm">
-                            {project.name}
+                            {project.url ? (
+                              <a href={project.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-neutral-300 dark:decoration-neutral-600 hover:decoration-neutral-500">
+                                {project.name}
+                              </a>
+                            ) : project.name}
                           </h5>
                           {project.period && (
                             <span className="text-xs text-neutral-400 dark:text-neutral-500 ml-2 shrink-0">
