@@ -73,8 +73,8 @@ const s = StyleSheet.create({
   sectionTitle: {
     fontSize: 13,
     fontWeight: 700,
-    marginBottom: 2,
-    marginTop: 20,
+    marginBottom: 6,
+    marginTop: 28,
   },
   sectionSub: { fontSize: 8, color: colors.muted, marginBottom: 10 },
   // Experience block
