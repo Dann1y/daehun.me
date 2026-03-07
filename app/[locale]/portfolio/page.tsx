@@ -154,16 +154,13 @@ export default async function PortfolioPage({
                           <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-2">
                             {project.description}
                           </p>
-                          <ul className="space-y-1">
+                          <ul className="list-disc list-outside pl-4 space-y-1">
                             {project.achievements.map((ach, i) => (
                               <li
                                 key={i}
                                 className="text-sm text-neutral-700 dark:text-neutral-300"
                               >
-                                <span className="font-semibold text-neutral-900 dark:text-neutral-100">
-                                  {highlightMetric(ach).metric}
-                                </span>
-                                {highlightMetric(ach).rest}
+                                {ach}
                               </li>
                             ))}
                           </ul>
@@ -246,16 +243,13 @@ export default async function PortfolioPage({
                         <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-2">
                           {project.description}
                         </p>
-                        <ul className="space-y-1">
+                        <ul className="list-disc list-outside pl-4 space-y-1">
                           {project.achievements.map((ach, i) => (
                             <li
                               key={i}
                               className="text-sm text-neutral-700 dark:text-neutral-300"
                             >
-                              <span className="font-semibold text-neutral-900 dark:text-neutral-100">
-                                {highlightMetric(ach).metric}
-                              </span>
-                              {highlightMetric(ach).rest}
+                              {ach}
                             </li>
                           ))}
                         </ul>
@@ -337,14 +331,4 @@ function getTotalDuration(experience: ExperienceData[], locale: string): string 
   if (years === 0) return `${rem} mos`
   if (rem === 0) return `${years} yrs`
   return `${years} yrs ${rem} mos`
-}
-
-function highlightMetric(text: string): { metric: string; rest: string } {
-  const match = text.match(
-    /^(.*?(?:\d[\d,.]*%?(?:\s*[→+]\s*[\d,.]+%?)*))(.*)/
-  )
-  if (match && match[1]) {
-    return { metric: match[1], rest: match[2] }
-  }
-  return { metric: '', rest: text }
 }
