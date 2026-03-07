@@ -218,6 +218,11 @@ function PortfolioPdfDocument({
         {/* Intro */}
         <Text style={s.name}>{data.intro.name}</Text>
         <Text style={s.title}>{data.intro.title}</Text>
+        {(data.intro.pdfContact?.phone || data.intro.pdfContact?.email) && (
+          <Text style={{ fontSize: 8, color: colors.muted, marginBottom: 4 }}>
+            {[data.intro.pdfContact.phone, data.intro.pdfContact.email].filter(Boolean).join('  |  ')}
+          </Text>
+        )}
         {data.intro.description.map((line, i) => (
           <Text key={i} style={s.descLine}>
             {line}

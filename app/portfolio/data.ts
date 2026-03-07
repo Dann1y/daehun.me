@@ -31,6 +31,7 @@ export interface PortfolioData {
     title: string
     description: string[]
     links: LinkData[]
+    pdfContact?: { phone?: string; email?: string }
   }
   experience: ExperienceData[]
   projects: { name: string; description: string; period?: string; url?: string }[]

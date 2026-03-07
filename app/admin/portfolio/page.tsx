@@ -161,6 +161,39 @@ export default function AdminPortfolioPage() {
           }
         />
         <label className="block text-xs font-medium text-neutral-500 mt-3 mb-1">
+          PDF Contact (PDF only)
+        </label>
+        <div className="flex gap-2 mb-2">
+          <input
+            className={inputClass}
+            placeholder="Phone"
+            value={data.intro.pdfContact?.phone ?? ''}
+            onChange={(e) =>
+              setData({
+                ...data,
+                intro: {
+                  ...data.intro,
+                  pdfContact: { ...data.intro.pdfContact, phone: e.target.value },
+                },
+              })
+            }
+          />
+          <input
+            className={inputClass}
+            placeholder="Email"
+            value={data.intro.pdfContact?.email ?? ''}
+            onChange={(e) =>
+              setData({
+                ...data,
+                intro: {
+                  ...data.intro,
+                  pdfContact: { ...data.intro.pdfContact, email: e.target.value },
+                },
+              })
+            }
+          />
+        </div>
+        <label className="block text-xs font-medium text-neutral-500 mt-3 mb-1">
           Links
         </label>
         {data.intro.links.map((link, i) => (
