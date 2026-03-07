@@ -287,13 +287,6 @@ function PortfolioPdfDocument({
           </>
         )}
 
-        {/* Work Experience */}
-        <Text style={s.sectionTitle}>Work Experience</Text>
-        <Text style={s.sectionSub}>
-          {getTotalDuration(data.experience, locale)}
-        </Text>
-        <ExperienceBlock data={data.experience} />
-
         {/* Activities & Education */}
         <View style={s.twoCol}>
           {data.activities.length > 0 && (
@@ -321,6 +314,15 @@ function PortfolioPdfDocument({
             </View>
           )}
         </View>
+      </Page>
+
+      {/* Work Experience — page 2 */}
+      <Page size="A4" style={s.page}>
+        <Text style={[s.sectionTitle, { marginTop: 0 }]}>Work Experience</Text>
+        <Text style={s.sectionSub}>
+          {getTotalDuration(data.experience, locale)}
+        </Text>
+        <ExperienceBlock data={data.experience} />
       </Page>
     </Document>
   )
