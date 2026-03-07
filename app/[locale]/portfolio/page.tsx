@@ -108,7 +108,7 @@ export default async function PortfolioPage({
       {/* Projects */}
       {data.projects && data.projects.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-xl font-semibold tracking-tight mb-4">
+          <h2 className="text-2xl font-bold tracking-tight mb-4">
             Projects
           </h2>
           <div className="space-y-2">
@@ -132,7 +132,7 @@ export default async function PortfolioPage({
       {/* Open Source */}
       {data.opensource.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-xl font-semibold tracking-tight mb-4">
+          <h2 className="text-2xl font-bold tracking-tight mb-4">
             Open Source
           </h2>
           <div className="space-y-2">
@@ -151,7 +151,7 @@ export default async function PortfolioPage({
 
       {/* Experience */}
       <div className="mb-12">
-        <h2 className="text-xl font-semibold tracking-tight mb-1">
+        <h2 className="text-2xl font-bold tracking-tight mb-1">
           Work Experience
         </h2>
         <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6">
@@ -221,7 +221,7 @@ export default async function PortfolioPage({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {data.activities.length > 0 && (
           <div>
-            <h2 className="text-xl font-semibold tracking-tight mb-4">
+            <h2 className="text-2xl font-bold tracking-tight mb-4">
               Activities
             </h2>
             <ul className="space-y-1">
@@ -238,7 +238,7 @@ export default async function PortfolioPage({
         )}
         {data.education.length > 0 && (
           <div>
-            <h2 className="text-xl font-semibold tracking-tight mb-4">
+            <h2 className="text-2xl font-bold tracking-tight mb-4">
               Education
             </h2>
             <ul className="space-y-1">
