@@ -75,7 +75,7 @@ export default function AdminPortfolioPage() {
       await generatePortfolioPdf(data, tab)
     } catch (err) {
       console.error('PDF generation error:', err)
-      setMessage('PDF generation failed')
+      setMessage(`PDF error: ${err instanceof Error ? err.message : 'unknown'}`)
       setTimeout(() => setMessage(''), 2000)
     } finally {
       setGenerating(false)

@@ -15,21 +15,21 @@ import type {
   ExperienceData,
 } from 'app/portfolio/data'
 
-// Register Nanum Gothic for Korean text support (static TTF, works with fontkit)
+// Register Noto Sans KR for Korean text support
 Font.register({
-  family: 'NanumGothic',
+  family: 'NotoSansKR',
   fonts: [
     {
-      src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf',
+      src: 'https://fonts.gstatic.com/s/notosanskr/v39/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLQ.ttf',
       fontWeight: 400,
     },
     {
-      src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.ttf',
-      fontWeight: 700,
+      src: 'https://fonts.gstatic.com/s/notosanskr/v39/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLQ.ttf',
+      fontWeight: 600,
     },
     {
-      src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf',
-      fontWeight: 800,
+      src: 'https://fonts.gstatic.com/s/notosanskr/v39/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLQ.ttf',
+      fontWeight: 700,
     },
   ],
 })
@@ -47,7 +47,7 @@ const colors = {
 
 const s = StyleSheet.create({
   page: {
-    fontFamily: 'NanumGothic',
+    fontFamily: 'NotoSansKR',
     fontSize: 9,
     color: colors.black,
     paddingTop: 40,
@@ -79,7 +79,7 @@ const s = StyleSheet.create({
   sectionSub: { fontSize: 8, color: colors.muted, marginBottom: 10 },
   // Experience block
   companyRow: { marginBottom: 2 },
-  companyName: { fontSize: 11, fontWeight: 700 },
+  companyName: { fontSize: 11, fontWeight: 600 },
   companyDesc: { fontSize: 8, color: colors.muted },
   roleBlock: {
     marginLeft: 8,
@@ -88,7 +88,7 @@ const s = StyleSheet.create({
     borderLeftColor: colors.border,
     marginBottom: 8,
   },
-  roleTitle: { fontSize: 9.5, fontWeight: 700, marginBottom: 1 },
+  roleTitle: { fontSize: 9.5, fontWeight: 600, marginBottom: 1 },
   rolePeriod: { fontSize: 7.5, color: colors.muted, marginBottom: 6 },
   projectCard: {
     marginBottom: 6,
@@ -103,7 +103,7 @@ const s = StyleSheet.create({
     alignItems: 'baseline',
     marginBottom: 2,
   },
-  projectName: { fontSize: 9, fontWeight: 700 },
+  projectName: { fontSize: 9, fontWeight: 600 },
   projectPeriod: { fontSize: 7, color: colors.light },
   projectDesc: { fontSize: 8, color: colors.muted, marginBottom: 4 },
   achItem: {
@@ -115,7 +115,7 @@ const s = StyleSheet.create({
   bullet: { position: 'absolute' as const, left: 0 },
   // Open Source
   osItem: { flexDirection: 'row', marginBottom: 3 },
-  osName: { fontSize: 9, fontWeight: 700 },
+  osName: { fontSize: 9, fontWeight: 600 },
   osDesc: { fontSize: 9, color: colors.muted },
   // Activities & Education
   twoCol: { flexDirection: 'row', gap: 24, marginTop: 20 },
@@ -246,11 +246,11 @@ function PortfolioPdfDocument({
               {data.projects.map((p, i) => (
                 <View key={i} style={{ flexDirection: 'row', marginBottom: 3 }}>
                   {p.url ? (
-                    <Link src={p.url} style={{ fontSize: 9, fontWeight: 700, minWidth: 100, color: colors.black, textDecoration: 'underline' }}>
+                    <Link src={p.url} style={{ fontSize: 9, fontWeight: 600, minWidth: 100, color: colors.black, textDecoration: 'underline' }}>
                       {p.name}
                     </Link>
                   ) : (
-                    <Text style={{ fontSize: 9, fontWeight: 700, minWidth: 100 }}>
+                    <Text style={{ fontSize: 9, fontWeight: 600, minWidth: 100 }}>
                       {p.name}
                     </Text>
                   )}
