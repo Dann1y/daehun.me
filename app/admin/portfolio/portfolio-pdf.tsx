@@ -229,10 +229,25 @@ function PortfolioPdfDocument({
         {data.projects && data.projects.length > 0 && (
           <>
             <Text style={s.sectionTitle}>Projects</Text>
-            <Text style={s.sectionSub}>
-              {getTotalDuration(data.projects, locale)}
-            </Text>
-            <ExperienceBlock data={data.projects} />
+            <View style={{ marginTop: 4 }}>
+              {data.projects.flatMap((exp) =>
+                exp.roles.flatMap((role) => role.projects)
+              ).map((project, i) => (
+                <View key={i} style={{ flexDirection: 'row', marginBottom: 3 }}>
+                  <Text style={{ fontSize: 9, fontWeight: 600, minWidth: 100 }}>
+                    {project.name}
+                  </Text>
+                  <Text style={{ fontSize: 9, color: colors.muted, flex: 1 }}>
+                    {project.description}
+                  </Text>
+                  {project.period && (
+                    <Text style={{ fontSize: 8, color: colors.light, marginLeft: 8 }}>
+                      {project.period}
+                    </Text>
+                  )}
+                </View>
+              ))}
+            </View>
           </>
         )}
 
