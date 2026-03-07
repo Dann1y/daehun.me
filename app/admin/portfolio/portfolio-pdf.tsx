@@ -56,8 +56,8 @@ const s = StyleSheet.create({
     lineHeight: 1.5,
   },
   // Intro
-  name: { fontSize: 22, fontWeight: 700, marginBottom: 12 },
-  title: { fontSize: 11, color: colors.muted, marginBottom: 12 },
+  name: { fontSize: 22, fontWeight: 700, marginBottom: 16 },
+  title: { fontSize: 11, color: colors.muted, marginBottom: 14 },
   descLine: { fontSize: 9, color: colors.dark, lineHeight: 1.6 },
   linksRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
   linkPill: {
@@ -131,7 +131,7 @@ function ExperienceBlock({ data }: { data: ExperienceData[] }) {
         <View key={ei} style={{ marginBottom: 12 }} wrap={false}>
           <View style={s.companyRow}>
             {exp.url ? (
-              <Link src={exp.url} style={s.companyName}>{exp.company}</Link>
+              <Link src={exp.url} style={[s.companyName, { color: colors.black, textDecoration: 'none' }]}>{exp.company}</Link>
             ) : (
               <Text style={s.companyName}>{exp.company}</Text>
             )}
@@ -148,7 +148,7 @@ function ExperienceBlock({ data }: { data: ExperienceData[] }) {
                 <View key={pi} style={s.projectCard} wrap={false}>
                   <View style={s.projectHeader}>
                     {project.url ? (
-                      <Link src={project.url} style={s.projectName}>{project.name}</Link>
+                      <Link src={project.url} style={[s.projectName, { color: colors.black, textDecoration: 'none' }]}>{project.name}</Link>
                     ) : (
                       <Text style={s.projectName}>{project.name}</Text>
                     )}
@@ -246,7 +246,7 @@ function PortfolioPdfDocument({
               {data.projects.map((p, i) => (
                 <View key={i} style={{ flexDirection: 'row', marginBottom: 3 }}>
                   {p.url ? (
-                    <Link src={p.url} style={{ fontSize: 9, fontWeight: 600, minWidth: 100, color: colors.black, textDecoration: 'underline' }}>
+                    <Link src={p.url} style={{ fontSize: 9, fontWeight: 600, minWidth: 100, color: colors.black, textDecoration: 'none' }}>
                       {p.name}
                     </Link>
                   ) : (
@@ -276,7 +276,7 @@ function PortfolioPdfDocument({
               {data.opensource.map((os, i) => (
                 <View key={i} style={s.osItem}>
                   {os.url ? (
-                    <Link src={os.url} style={{ ...s.osName, textDecoration: 'underline', color: colors.black }}>{os.name}</Link>
+                    <Link src={os.url} style={[s.osName, { color: colors.black, textDecoration: 'none' }]}>{os.name}</Link>
                   ) : (
                     <Text style={s.osName}>{os.name}</Text>
                   )}
