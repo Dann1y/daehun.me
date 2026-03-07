@@ -16,7 +16,14 @@ export default function AdminPortfolioPage() {
   const fetchData = useCallback(async (locale: Tab) => {
     try {
       const res = await fetch(`/api/admin/portfolio?locale=${locale}`)
-      if (res.ok) setData(await res.json())
+      if (res.ok) {
+        const json = await res.json()
+        // Migrate old { name, description } projects to ExperienceData[]
+        if (json.projects?.length && !('roles' in json.projects[0])) {
+          json.projects = []
+        }
+        setData(json)
+      }
     } catch {
       // keep existing data
     }
