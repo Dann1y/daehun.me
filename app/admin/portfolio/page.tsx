@@ -183,6 +183,194 @@ export default function AdminPortfolioPage() {
         />
       </Section>
 
+      {/* Projects */}
+      <Section title="Projects">
+        {(data.projects ?? []).map((exp, ei) => (
+          <div
+            key={ei}
+            className="border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 mb-4"
+          >
+            <div className="flex justify-between items-start mb-3">
+              <div className="flex-1 space-y-2">
+                <Field
+                  label="Company"
+                  value={exp.company}
+                  onChange={(v) => updateProjectExp(ei, { ...exp, company: v })}
+                />
+                <Field
+                  label="Description"
+                  value={exp.description}
+                  onChange={(v) =>
+                    updateProjectExp(ei, { ...exp, description: v })
+                  }
+                />
+                <Field
+                  label="Duration"
+                  value={exp.duration ?? ''}
+                  onChange={(v) =>
+                    updateProjectExp(ei, { ...exp, duration: v })
+                  }
+                />
+              </div>
+              <RemoveButton
+                onClick={() =>
+                  setData({
+                    ...data,
+                    projects: (data.projects ?? []).filter((_, j) => j !== ei),
+                  })
+                }
+              />
+            </div>
+
+            {exp.roles.map((role, ri) => (
+              <div key={ri} className="ml-4 mb-4 border-l-2 border-neutral-200 dark:border-neutral-700 pl-4">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex-1 space-y-2">
+                    <Field
+                      label="Role Title"
+                      value={role.title}
+                      onChange={(v) =>
+                        updateProjectRole(ei, ri, { ...role, title: v })
+                      }
+                    />
+                    <Field
+                      label="Period"
+                      value={role.period}
+                      onChange={(v) =>
+                        updateProjectRole(ei, ri, { ...role, period: v })
+                      }
+                    />
+                  </div>
+                  <RemoveButton
+                    onClick={() => {
+                      const roles = exp.roles.filter((_, j) => j !== ri)
+                      updateProjectExp(ei, { ...exp, roles })
+                    }}
+                  />
+                </div>
+
+                {role.projects.map((project, pi) => (
+                  <div
+                    key={pi}
+                    className="ml-4 mb-2 p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg"
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex-1 space-y-2">
+                        <Field
+                          label="Project Name"
+                          value={project.name}
+                          onChange={(v) =>
+                            updateProjectItem(ei, ri, pi, { ...project, name: v })
+                          }
+                        />
+                        <Field
+                          label="Period"
+                          value={project.period ?? ''}
+                          onChange={(v) =>
+                            updateProjectItem(ei, ri, pi, {
+                              ...project,
+                              period: v,
+                            })
+                          }
+                        />
+                        <Field
+                          label="Description"
+                          value={project.description}
+                          onChange={(v) =>
+                            updateProjectItem(ei, ri, pi, {
+                              ...project,
+                              description: v,
+                            })
+                          }
+                        />
+                      </div>
+                      <RemoveButton
+                        onClick={() => {
+                          const projects = role.projects.filter(
+                            (_, j) => j !== pi
+                          )
+                          updateProjectRole(ei, ri, { ...role, projects })
+                        }}
+                      />
+                    </div>
+                    <label className="block text-xs font-medium text-neutral-500 mb-1">
+                      Achievements
+                    </label>
+                    {project.achievements.map((ach, ai) => (
+                      <div key={ai} className="flex gap-2 mb-1">
+                        <input
+                          className={inputClass}
+                          value={ach}
+                          onChange={(e) => {
+                            const achievements = [...project.achievements]
+                            achievements[ai] = e.target.value
+                            updateProjectItem(ei, ri, pi, {
+                              ...project,
+                              achievements,
+                            })
+                          }}
+                        />
+                        <RemoveButton
+                          onClick={() => {
+                            const achievements = project.achievements.filter(
+                              (_, j) => j !== ai
+                            )
+                            updateProjectItem(ei, ri, pi, {
+                              ...project,
+                              achievements,
+                            })
+                          }}
+                        />
+                      </div>
+                    ))}
+                    <AddButton
+                      onClick={() =>
+                        updateProjectItem(ei, ri, pi, {
+                          ...project,
+                          achievements: [...project.achievements, ''],
+                        })
+                      }
+                    />
+                  </div>
+                ))}
+                <AddButton
+                  label="Add Project"
+                  onClick={() => {
+                    const projects = [
+                      ...role.projects,
+                      { name: '', period: '', description: '', achievements: [] },
+                    ]
+                    updateProjectRole(ei, ri, { ...role, projects })
+                  }}
+                />
+              </div>
+            ))}
+            <AddButton
+              label="Add Role"
+              onClick={() => {
+                const roles = [
+                  ...exp.roles,
+                  { title: '', period: '', projects: [] },
+                ]
+                updateProjectExp(ei, { ...exp, roles })
+              }}
+            />
+          </div>
+        ))}
+        <AddButton
+          label="Add Company"
+          onClick={() =>
+            setData({
+              ...data,
+              projects: [
+                ...(data.projects ?? []),
+                { company: '', description: '', roles: [] },
+              ],
+            })
+          }
+        />
+      </Section>
+
       {/* Experience */}
       <Section title="Experience">
         {data.experience.map((exp, ei) => (
@@ -202,6 +390,13 @@ export default function AdminPortfolioPage() {
                   value={exp.description}
                   onChange={(v) =>
                     updateExperience(ei, { ...exp, description: v })
+                  }
+                />
+                <Field
+                  label="Duration"
+                  value={exp.duration ?? ''}
+                  onChange={(v) =>
+                    updateExperience(ei, { ...exp, duration: v })
                   }
                 />
               </div>
@@ -534,6 +729,30 @@ export default function AdminPortfolioPage() {
     roles[ri] = { ...roles[ri], projects }
     experience[ei] = { ...experience[ei], roles }
     setData({ ...data!, experience })
+  }
+
+  function updateProjectExp(idx: number, exp: ExperienceData) {
+    const projects = [...(data!.projects ?? [])]
+    projects[idx] = exp
+    setData({ ...data!, projects })
+  }
+
+  function updateProjectRole(ei: number, ri: number, role: RoleData) {
+    const projects = [...(data!.projects ?? [])]
+    const roles = [...projects[ei].roles]
+    roles[ri] = role
+    projects[ei] = { ...projects[ei], roles }
+    setData({ ...data!, projects })
+  }
+
+  function updateProjectItem(ei: number, ri: number, pi: number, project: ProjectData) {
+    const projects = [...(data!.projects ?? [])]
+    const roles = [...projects[ei].roles]
+    const prjs = [...roles[ri].projects]
+    prjs[pi] = project
+    roles[ri] = { ...roles[ri], projects: prjs }
+    projects[ei] = { ...projects[ei], roles }
+    setData({ ...data!, projects })
   }
 }
 

@@ -14,6 +14,7 @@ export interface RoleData {
 export interface ExperienceData {
   company: string
   description: string
+  duration?: string
   roles: RoleData[]
 }
 
@@ -30,6 +31,7 @@ export interface PortfolioData {
     links: LinkData[]
   }
   experience: ExperienceData[]
+  projects: ExperienceData[]
   opensource: { name: string; description: string }[]
   activities: { name: string; date: string }[]
   education: { name: string; period: string }[]
@@ -45,10 +47,12 @@ export const defaultPortfolioKo: PortfolioData = {
     ],
     links: [],
   },
+  projects: [],
   experience: [
     {
       company: 'THE SWING',
       description: '모빌리티 플랫폼 스타트업',
+      duration: '7개월',
       roles: [
         {
           title: 'Product Manager',
@@ -102,6 +106,7 @@ export const defaultPortfolioKo: PortfolioData = {
     {
       company: 'EJN (TWIP)',
       description: '크리에이터 이코노미 스타트업',
+      duration: '2년 9개월',
       roles: [
         {
           title: 'Frontend Developer',
@@ -194,10 +199,12 @@ export const defaultPortfolioEn: PortfolioData = {
     ],
     links: [],
   },
+  projects: [],
   experience: [
     {
       company: 'THE SWING',
       description: 'Mobility platform startup',
+      duration: '7 mos',
       roles: [
         {
           title: 'Product Manager',
@@ -251,6 +258,7 @@ export const defaultPortfolioEn: PortfolioData = {
     {
       company: 'EJN (TWIP)',
       description: 'Creator economy startup',
+      duration: '2 yrs 9 mos',
       roles: [
         {
           title: 'Frontend Developer',
