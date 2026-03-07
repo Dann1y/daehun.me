@@ -73,7 +73,8 @@ export default function AdminPortfolioPage() {
     try {
       const { generatePortfolioPdf } = await import('./portfolio-pdf')
       await generatePortfolioPdf(data, tab)
-    } catch {
+    } catch (err) {
+      console.error('PDF generation error:', err)
       setMessage('PDF generation failed')
       setTimeout(() => setMessage(''), 2000)
     } finally {
