@@ -56,8 +56,8 @@ const s = StyleSheet.create({
     lineHeight: 1.5,
   },
   // Intro
-  name: { fontSize: 22, fontWeight: 700, marginBottom: 6 },
-  title: { fontSize: 11, color: colors.muted, marginBottom: 10 },
+  name: { fontSize: 22, fontWeight: 700, marginBottom: 12 },
+  title: { fontSize: 11, color: colors.muted, marginBottom: 12 },
   descLine: { fontSize: 9, color: colors.dark, lineHeight: 1.6 },
   linksRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
   linkPill: {
