@@ -25,5 +25,8 @@
     "sugar-high": "^0.9.5",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "agentation": "^2.2.1"
   }
 }

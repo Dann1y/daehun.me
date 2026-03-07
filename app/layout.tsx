@@ -2,6 +2,7 @@ import './global.css'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { cx } from 'class-variance-authority'
+import { Agentation } from 'agentation'
 
 export default function RootLayout({
   children,
@@ -21,6 +22,7 @@ export default function RootLayout({
     >
       <body className="antialiased max-w-xl h-full pt-8 mx-4 lg:mx-auto">
         {children}
+        {process.env.NODE_ENV === 'development' && <Agentation />}
       </body>
     </html>
   )
