@@ -29,7 +29,14 @@ async function getPortfolioData(locale: string): Promise<PortfolioData> {
       const { blobs } = await list({ prefix: key, limit: 1 })
       if (blobs.length > 0) {
         const res = await fetch(blobs[0].url, { cache: 'no-store' })
-        if (res.ok) return (await res.json()) as PortfolioData
+        if (res.ok) {
+          const json = (await res.json()) as PortfolioData
+          // Migrate old { name, description } projects to ExperienceData[]
+          if (json.projects?.length && !('roles' in json.projects[0])) {
+            json.projects = []
+          }
+          return json
+        }
       }
     }
   } catch {
