@@ -534,6 +534,16 @@ export default function AdminPortfolioPage() {
                 setData({ ...data, opensource })
               }}
             />
+            <input
+              className={`${inputClass} w-40 shrink-0`}
+              placeholder="URL"
+              value={os.url ?? ''}
+              onChange={(e) => {
+                const opensource = [...data.opensource]
+                opensource[i] = { ...os, url: e.target.value }
+                setData({ ...data, opensource })
+              }}
+            />
             <RemoveButton
               onClick={() =>
                 setData({

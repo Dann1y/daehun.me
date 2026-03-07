@@ -275,7 +275,11 @@ function PortfolioPdfDocument({
             <View style={{ marginTop: 4 }}>
               {data.opensource.map((os, i) => (
                 <View key={i} style={s.osItem}>
-                  <Text style={s.osName}>{os.name}</Text>
+                  {os.url ? (
+                    <Link src={os.url} style={{ ...s.osName, textDecoration: 'underline', color: colors.black }}>{os.name}</Link>
+                  ) : (
+                    <Text style={s.osName}>{os.name}</Text>
+                  )}
                   <Text style={s.osDesc}> — {os.description}</Text>
                 </View>
               ))}

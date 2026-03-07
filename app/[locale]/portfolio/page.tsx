@@ -144,7 +144,13 @@ export default async function PortfolioPage({
           <div className="space-y-2">
             {data.opensource.map((os) => (
               <div key={os.name} className="text-sm">
-                <span className="font-medium">{os.name}</span>
+                {os.url ? (
+                  <a href={os.url} target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-2 decoration-neutral-300 dark:decoration-neutral-600 hover:decoration-neutral-500">
+                    {os.name}
+                  </a>
+                ) : (
+                  <span className="font-medium">{os.name}</span>
+                )}
                 <span className="text-neutral-500 dark:text-neutral-400">
                   {' '}
                   — {os.description}

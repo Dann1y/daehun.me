@@ -35,7 +35,7 @@ export interface PortfolioData {
   }
   experience: ExperienceData[]
   projects: { name: string; description: string; period?: string; url?: string }[]
-  opensource: { name: string; description: string }[]
+  opensource: { name: string; description: string; url?: string }[]
   activities: { name: string; date: string }[]
   education: { name: string; period: string }[]
 }
