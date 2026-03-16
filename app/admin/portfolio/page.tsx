@@ -2,6 +2,20 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from '@dnd-kit/core'
+import {
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 import type { PortfolioData, ExperienceData, RoleData, ProjectData } from 'app/portfolio/data'
 
 type Tab = 'ko' | 'en'
@@ -13,6 +27,7 @@ export default function AdminPortfolioPage() {
   const [generating, setGenerating] = useState(false)
   const [message, setMessage] = useState('')
   const router = useRouter()
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
 
   const fetchData = useCallback(async (locale: Tab) => {
     try {
@@ -241,56 +256,73 @@ export default function AdminPortfolioPage() {
 
       {/* Projects */}
       <Section title="Projects">
-        {(data.projects ?? []).map((p, i) => (
-          <div key={i} className="flex gap-2 mb-2 items-start">
-            <div className="flex-1 space-y-2">
-              <Field
-                label="Name"
-                value={p.name}
-                onChange={(v) => {
-                  const projects = [...(data.projects ?? [])]
-                  projects[i] = { ...p, name: v }
-                  setData({ ...data, projects })
-                }}
-              />
-              <Field
-                label="Description"
-                value={p.description}
-                onChange={(v) => {
-                  const projects = [...(data.projects ?? [])]
-                  projects[i] = { ...p, description: v }
-                  setData({ ...data, projects })
-                }}
-              />
-              <Field
-                label="Period"
-                value={p.period ?? ''}
-                onChange={(v) => {
-                  const projects = [...(data.projects ?? [])]
-                  projects[i] = { ...p, period: v }
-                  setData({ ...data, projects })
-                }}
-              />
-              <Field
-                label="URL"
-                value={p.url ?? ''}
-                onChange={(v) => {
-                  const projects = [...(data.projects ?? [])]
-                  projects[i] = { ...p, url: v }
-                  setData({ ...data, projects })
-                }}
-              />
-            </div>
-            <RemoveButton
-              onClick={() =>
-                setData({
-                  ...data,
-                  projects: (data.projects ?? []).filter((_, j) => j !== i),
-                })
-              }
-            />
-          </div>
-        ))}
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e: DragEndEvent) => {
+          const { active, over } = e
+          if (over && active.id !== over.id) {
+            const oldIdx = Number(active.id)
+            const newIdx = Number(over.id)
+            setData({ ...data, projects: reorder(data.projects ?? [], oldIdx, newIdx) })
+          }
+        }}>
+          <SortableContext items={(data.projects ?? []).map((_, i) => String(i))} strategy={verticalListSortingStrategy}>
+            {(data.projects ?? []).map((p, i) => (
+              <SortableItem key={i} id={String(i)}>
+                {({ listeners, attributes }) => (
+                  <div className="flex gap-2 mb-2 items-start">
+                    <DragHandle listeners={listeners} attributes={attributes} />
+                    <div className="flex-1 space-y-2">
+                      <Field
+                        label="Name"
+                        value={p.name}
+                        onChange={(v) => {
+                          const projects = [...(data.projects ?? [])]
+                          projects[i] = { ...p, name: v }
+                          setData({ ...data, projects })
+                        }}
+                      />
+                      <Field
+                        label="Description"
+                        multiline
+                        value={p.description}
+                        onChange={(v) => {
+                          const projects = [...(data.projects ?? [])]
+                          projects[i] = { ...p, description: v }
+                          setData({ ...data, projects })
+                        }}
+                      />
+                      <Field
+                        label="Period"
+                        value={p.period ?? ''}
+                        onChange={(v) => {
+                          const projects = [...(data.projects ?? [])]
+                          projects[i] = { ...p, period: v }
+                          setData({ ...data, projects })
+                        }}
+                      />
+                      <Field
+                        label="URL"
+                        value={p.url ?? ''}
+                        onChange={(v) => {
+                          const projects = [...(data.projects ?? [])]
+                          projects[i] = { ...p, url: v }
+                          setData({ ...data, projects })
+                        }}
+                      />
+                    </div>
+                    <RemoveButton
+                      onClick={() =>
+                        setData({
+                          ...data,
+                          projects: (data.projects ?? []).filter((_, j) => j !== i),
+                        })
+                      }
+                    />
+                  </div>
+                )}
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
         <AddButton
           label="Add Project"
           onClick={() =>
@@ -307,49 +339,59 @@ export default function AdminPortfolioPage() {
 
       {/* Experience */}
       <Section title="Experience">
-        {data.experience.map((exp, ei) => (
-          <div
-            key={ei}
-            className="border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 mb-4"
-          >
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex-1 space-y-2">
-                <Field
-                  label="Company"
-                  value={exp.company}
-                  onChange={(v) => updateExperience(ei, { ...exp, company: v })}
-                />
-                <Field
-                  label="Description"
-                  value={exp.description}
-                  onChange={(v) =>
-                    updateExperience(ei, { ...exp, description: v })
-                  }
-                />
-                <Field
-                  label="Duration"
-                  value={exp.duration ?? ''}
-                  onChange={(v) =>
-                    updateExperience(ei, { ...exp, duration: v })
-                  }
-                />
-                <Field
-                  label="URL"
-                  value={exp.url ?? ''}
-                  onChange={(v) =>
-                    updateExperience(ei, { ...exp, url: v })
-                  }
-                />
-              </div>
-              <RemoveButton
-                onClick={() =>
-                  setData({
-                    ...data,
-                    experience: data.experience.filter((_, j) => j !== ei),
-                  })
-                }
-              />
-            </div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e: DragEndEvent) => {
+          const { active, over } = e
+          if (over && active.id !== over.id) {
+            const oldIdx = Number(active.id)
+            const newIdx = Number(over.id)
+            setData({ ...data, experience: reorder(data.experience, oldIdx, newIdx) })
+          }
+        }}>
+          <SortableContext items={data.experience.map((_, i) => String(i))} strategy={verticalListSortingStrategy}>
+            {data.experience.map((exp, ei) => (
+              <SortableItem key={ei} id={String(ei)}>
+                {({ listeners, attributes }) => (
+                  <div className="border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 mb-4">
+                    <div className="flex justify-between items-start mb-3">
+                      <DragHandle listeners={listeners} attributes={attributes} />
+                      <div className="flex-1 space-y-2">
+                        <Field
+                          label="Company"
+                          value={exp.company}
+                          onChange={(v) => updateExperience(ei, { ...exp, company: v })}
+                        />
+                        <Field
+                          label="Description"
+                          multiline
+                          value={exp.description}
+                          onChange={(v) =>
+                            updateExperience(ei, { ...exp, description: v })
+                          }
+                        />
+                        <Field
+                          label="Duration"
+                          value={exp.duration ?? ''}
+                          onChange={(v) =>
+                            updateExperience(ei, { ...exp, duration: v })
+                          }
+                        />
+                        <Field
+                          label="URL"
+                          value={exp.url ?? ''}
+                          onChange={(v) =>
+                            updateExperience(ei, { ...exp, url: v })
+                          }
+                        />
+                      </div>
+                      <RemoveButton
+                        onClick={() =>
+                          setData({
+                            ...data,
+                            experience: data.experience.filter((_, j) => j !== ei),
+                          })
+                        }
+                      />
+                    </div>
 
             {exp.roles.map((role, ri) => (
               <div key={ri} className="ml-4 mb-4 border-l-2 border-neutral-200 dark:border-neutral-700 pl-4">
@@ -404,6 +446,7 @@ export default function AdminPortfolioPage() {
                         />
                         <Field
                           label="Description"
+                          multiline
                           value={project.description}
                           onChange={(v) =>
                             updateProject(ei, ri, pi, {
@@ -494,8 +537,12 @@ export default function AdminPortfolioPage() {
                 updateExperience(ei, { ...exp, roles })
               }}
             />
-          </div>
-        ))}
+                  </div>
+                )}
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
         <AddButton
           label="Add Company"
           onClick={() =>
@@ -512,48 +559,64 @@ export default function AdminPortfolioPage() {
 
       {/* Open Source */}
       <Section title="Open Source">
-        {data.opensource.map((os, i) => (
-          <div key={i} className="flex gap-2 mb-2">
-            <input
-              className={inputClass}
-              placeholder="Name"
-              value={os.name}
-              onChange={(e) => {
-                const opensource = [...data.opensource]
-                opensource[i] = { ...os, name: e.target.value }
-                setData({ ...data, opensource })
-              }}
-            />
-            <input
-              className={inputClass}
-              placeholder="Description"
-              value={os.description}
-              onChange={(e) => {
-                const opensource = [...data.opensource]
-                opensource[i] = { ...os, description: e.target.value }
-                setData({ ...data, opensource })
-              }}
-            />
-            <input
-              className={`${inputClass} w-40 shrink-0`}
-              placeholder="URL"
-              value={os.url ?? ''}
-              onChange={(e) => {
-                const opensource = [...data.opensource]
-                opensource[i] = { ...os, url: e.target.value }
-                setData({ ...data, opensource })
-              }}
-            />
-            <RemoveButton
-              onClick={() =>
-                setData({
-                  ...data,
-                  opensource: data.opensource.filter((_, j) => j !== i),
-                })
-              }
-            />
-          </div>
-        ))}
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e: DragEndEvent) => {
+          const { active, over } = e
+          if (over && active.id !== over.id) {
+            const oldIdx = Number(active.id)
+            const newIdx = Number(over.id)
+            setData({ ...data, opensource: reorder(data.opensource, oldIdx, newIdx) })
+          }
+        }}>
+          <SortableContext items={data.opensource.map((_, i) => String(i))} strategy={verticalListSortingStrategy}>
+            {data.opensource.map((os, i) => (
+              <SortableItem key={i} id={String(i)}>
+                {({ listeners, attributes }) => (
+                  <div className="flex gap-2 mb-2">
+                    <DragHandle listeners={listeners} attributes={attributes} />
+                    <input
+                      className={inputClass}
+                      placeholder="Name"
+                      value={os.name}
+                      onChange={(e) => {
+                        const opensource = [...data.opensource]
+                        opensource[i] = { ...os, name: e.target.value }
+                        setData({ ...data, opensource })
+                      }}
+                    />
+                    <input
+                      className={inputClass}
+                      placeholder="Description"
+                      value={os.description}
+                      onChange={(e) => {
+                        const opensource = [...data.opensource]
+                        opensource[i] = { ...os, description: e.target.value }
+                        setData({ ...data, opensource })
+                      }}
+                    />
+                    <input
+                      className={`${inputClass} w-40 shrink-0`}
+                      placeholder="URL"
+                      value={os.url ?? ''}
+                      onChange={(e) => {
+                        const opensource = [...data.opensource]
+                        opensource[i] = { ...os, url: e.target.value }
+                        setData({ ...data, opensource })
+                      }}
+                    />
+                    <RemoveButton
+                      onClick={() =>
+                        setData({
+                          ...data,
+                          opensource: data.opensource.filter((_, j) => j !== i),
+                        })
+                      }
+                    />
+                  </div>
+                )}
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
         <AddButton
           onClick={() =>
             setData({
@@ -566,38 +629,54 @@ export default function AdminPortfolioPage() {
 
       {/* Activities */}
       <Section title="Activities">
-        {data.activities.map((a, i) => (
-          <div key={i} className="flex gap-2 mb-2">
-            <input
-              className={inputClass}
-              placeholder="Name"
-              value={a.name}
-              onChange={(e) => {
-                const activities = [...data.activities]
-                activities[i] = { ...a, name: e.target.value }
-                setData({ ...data, activities })
-              }}
-            />
-            <input
-              className={`${inputClass} w-24 shrink-0`}
-              placeholder="Date"
-              value={a.date}
-              onChange={(e) => {
-                const activities = [...data.activities]
-                activities[i] = { ...a, date: e.target.value }
-                setData({ ...data, activities })
-              }}
-            />
-            <RemoveButton
-              onClick={() =>
-                setData({
-                  ...data,
-                  activities: data.activities.filter((_, j) => j !== i),
-                })
-              }
-            />
-          </div>
-        ))}
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e: DragEndEvent) => {
+          const { active, over } = e
+          if (over && active.id !== over.id) {
+            const oldIdx = Number(active.id)
+            const newIdx = Number(over.id)
+            setData({ ...data, activities: reorder(data.activities, oldIdx, newIdx) })
+          }
+        }}>
+          <SortableContext items={data.activities.map((_, i) => String(i))} strategy={verticalListSortingStrategy}>
+            {data.activities.map((a, i) => (
+              <SortableItem key={i} id={String(i)}>
+                {({ listeners, attributes }) => (
+                  <div className="flex gap-2 mb-2">
+                    <DragHandle listeners={listeners} attributes={attributes} />
+                    <input
+                      className={inputClass}
+                      placeholder="Name"
+                      value={a.name}
+                      onChange={(e) => {
+                        const activities = [...data.activities]
+                        activities[i] = { ...a, name: e.target.value }
+                        setData({ ...data, activities })
+                      }}
+                    />
+                    <input
+                      className={`${inputClass} w-24 shrink-0`}
+                      placeholder="Date"
+                      value={a.date}
+                      onChange={(e) => {
+                        const activities = [...data.activities]
+                        activities[i] = { ...a, date: e.target.value }
+                        setData({ ...data, activities })
+                      }}
+                    />
+                    <RemoveButton
+                      onClick={() =>
+                        setData({
+                          ...data,
+                          activities: data.activities.filter((_, j) => j !== i),
+                        })
+                      }
+                    />
+                  </div>
+                )}
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
         <AddButton
           onClick={() =>
             setData({
@@ -610,38 +689,54 @@ export default function AdminPortfolioPage() {
 
       {/* Education */}
       <Section title="Education">
-        {data.education.map((e, i) => (
-          <div key={i} className="flex gap-2 mb-2">
-            <input
-              className={inputClass}
-              placeholder="Name"
-              value={e.name}
-              onChange={(ev) => {
-                const education = [...data.education]
-                education[i] = { ...e, name: ev.target.value }
-                setData({ ...data, education })
-              }}
-            />
-            <input
-              className={`${inputClass} w-40 shrink-0`}
-              placeholder="Period"
-              value={e.period}
-              onChange={(ev) => {
-                const education = [...data.education]
-                education[i] = { ...e, period: ev.target.value }
-                setData({ ...data, education })
-              }}
-            />
-            <RemoveButton
-              onClick={() =>
-                setData({
-                  ...data,
-                  education: data.education.filter((_, j) => j !== i),
-                })
-              }
-            />
-          </div>
-        ))}
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e: DragEndEvent) => {
+          const { active, over } = e
+          if (over && active.id !== over.id) {
+            const oldIdx = Number(active.id)
+            const newIdx = Number(over.id)
+            setData({ ...data, education: reorder(data.education, oldIdx, newIdx) })
+          }
+        }}>
+          <SortableContext items={data.education.map((_, i) => String(i))} strategy={verticalListSortingStrategy}>
+            {data.education.map((e, i) => (
+              <SortableItem key={i} id={String(i)}>
+                {({ listeners, attributes }) => (
+                  <div className="flex gap-2 mb-2">
+                    <DragHandle listeners={listeners} attributes={attributes} />
+                    <input
+                      className={inputClass}
+                      placeholder="Name"
+                      value={e.name}
+                      onChange={(ev) => {
+                        const education = [...data.education]
+                        education[i] = { ...e, name: ev.target.value }
+                        setData({ ...data, education })
+                      }}
+                    />
+                    <input
+                      className={`${inputClass} w-40 shrink-0`}
+                      placeholder="Period"
+                      value={e.period}
+                      onChange={(ev) => {
+                        const education = [...data.education]
+                        education[i] = { ...e, period: ev.target.value }
+                        setData({ ...data, education })
+                      }}
+                    />
+                    <RemoveButton
+                      onClick={() =>
+                        setData({
+                          ...data,
+                          education: data.education.filter((_, j) => j !== i),
+                        })
+                      }
+                    />
+                  </div>
+                )}
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
         <AddButton
           onClick={() =>
             setData({
@@ -702,7 +797,7 @@ export default function AdminPortfolioPage() {
 }
 
 const inputClass =
-  'flex-1 px-2 py-1.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-neutral-400'
+  'flex-1 w-full px-2 py-1.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-neutral-400'
 
 function Section({
   title,
@@ -723,21 +818,31 @@ function Field({
   label,
   value,
   onChange,
+  multiline,
 }: {
   label: string
   value: string
   onChange: (v: string) => void
+  multiline?: boolean
 }) {
   return (
     <div>
       <label className="block text-xs font-medium text-neutral-500 mb-1">
         {label}
       </label>
-      <input
-        className={inputClass}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      {multiline ? (
+        <textarea
+          className={`${inputClass} min-h-[60px]`}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      ) : (
+        <input
+          className={inputClass}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      )}
     </div>
   )
 }
@@ -788,5 +893,55 @@ function RemoveButton({ onClick }: { onClick: () => void }) {
     >
       ×
     </button>
+  )
+}
+
+function reorder<T>(list: T[], from: number, to: number): T[] {
+  const result = [...list]
+  const [removed] = result.splice(from, 1)
+  result.splice(to, 0, removed)
+  return result
+}
+
+function DragHandle({ listeners, attributes }: { listeners?: ReturnType<typeof useSortable>['listeners']; attributes?: ReturnType<typeof useSortable>['attributes'] }) {
+  return (
+    <button
+      className="cursor-grab active:cursor-grabbing text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 px-1 shrink-0 touch-none"
+      {...listeners}
+      {...attributes}
+    >
+      ⠿
+    </button>
+  )
+}
+
+type SortableProps = { listeners: ReturnType<typeof useSortable>['listeners']; attributes: ReturnType<typeof useSortable>['attributes'] }
+
+function SortableItem({
+  id,
+  children,
+}: {
+  id: string
+  children: (props: SortableProps) => React.ReactNode
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  }
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      {children({ listeners: listeners ?? {}, attributes })}
+    </div>
   )
 }
